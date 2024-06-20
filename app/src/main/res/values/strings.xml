@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">PurchasingScrapApp</string>
+
+    <!-- Content Descriptions for Accessibility -->
+    <string name="scrap_image">Scrap Image</string>
+    <string name="edit_scrap">Edit Scrap</string>
+    <string name="delete_scrap">Delete Scrap</string>
+    <string name="send_message">Send Message</string>
+</resources>
