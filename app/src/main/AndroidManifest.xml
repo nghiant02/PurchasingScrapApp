@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PurchasingScrapApp"
         tools:targetApi="31">
         <activity
-            android:name=".view.activity.AuthActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,11 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".view.activity.PasswordRecoveryActivity" />
-        <activity android:name=".view.activity.HomeActivity" />
-        <activity android:name=".view.activity.RegisterActivity" />
-
+        <activity android:name=".activity.MainActivity" />
+        <activity android:name=".activity.RegisterActivity" />
+        <activity android:name=".activity.ForgotPasswordActivity" />
 
     </application>
 

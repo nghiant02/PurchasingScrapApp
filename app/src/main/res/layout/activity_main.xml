@@ -1,0 +1,37 @@
+<!-- app/src/main/res/layout/activity_main.xml -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/buttonViewScraps"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="View Scraps"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonPostScrap"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Post Scrap"
+        android:layout_below="@id/buttonViewScraps"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Profile"
+        android:layout_below="@id/buttonPostScrap"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_below="@id/buttonProfile"
+        android:layout_marginTop="16dp" />
+</RelativeLayout>

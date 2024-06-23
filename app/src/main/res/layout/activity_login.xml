@@ -1,10 +1,10 @@
-<!-- app/src/main/res/layout/activity_register.xml -->
+<!-- app/src/main/res/layout/activity_login.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".activity.RegisterActivity">
+    tools:context=".activity.LoginActivity">
 
     <EditText
         android:id="@+id/editTextEmail"
@@ -23,22 +23,39 @@
         android:layout_below="@id/editTextEmail"
         android:layout_marginTop="16dp" />
 
-    <EditText
-        android:id="@+id/editTextConfirmPassword"
+    <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
+        android:text="Login"
         android:layout_below="@id/editTextPassword"
         android:layout_marginTop="16dp" />
 
-    <Button
-        android:id="@+id/buttonRegister"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_below="@id/editTextConfirmPassword"
-        android:layout_marginTop="16dp" />
+        android:orientation="horizontal"
+        android:layout_below="@id/buttonLogin"
+        android:layout_marginTop="16dp">
+
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Register"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_blue_dark" />
+
+        <Button
+            android:id="@+id/buttonForgotPassword"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Forgot Password?"
+            android:background="@android:color/transparent"
+            android:textColor="@android:color/holo_blue_dark" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
