@@ -1,7 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
 public class User {
-    private int id;
+    private String id;
     private String email;
     private String password;
     private String name;
@@ -15,7 +15,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String email, String password, String name, String phone, String address, String profileImage, String role, long createdAt, long updatedAt) {
+    public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, long createdAt, long updatedAt) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -28,11 +28,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
