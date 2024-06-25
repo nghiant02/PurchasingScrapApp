@@ -18,6 +18,8 @@ navigationFragmentVersion = "2.7.3"
 navigationUi = "2.7.7"
 navigationUiVersion = "2.7.3"
 firebaseAnalytics = "22.0.2"
+picasso = "2.71828"
+playServicesAuth = "21.2.0"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -37,6 +39,8 @@ navigation-fragment-v273 = { module = "androidx.navigation:navigation-fragment",
 navigation-ui = { group = "androidx.navigation", name = "navigation-ui", version.ref = "navigationUi" }
 navigation-ui-v273 = { module = "androidx.navigation:navigation-ui", version.ref = "navigationUiVersion" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

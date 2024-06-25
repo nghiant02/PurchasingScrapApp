@@ -23,19 +23,16 @@ public class MainActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        // Initialize buttons
         buttonViewScraps = findViewById(R.id.buttonViewScraps);
         buttonPostScrap = findViewById(R.id.buttonPostScrap);
         buttonProfile = findViewById(R.id.buttonProfile);
         buttonLogout = findViewById(R.id.buttonLogout);
 
-        // Set onClick listeners
-//        buttonViewScraps.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ScrapListActivity.class)));
+        buttonViewScraps.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ScrapListActivity.class)));
 //        buttonPostScrap.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PostScrapActivity.class)));
 //        buttonProfile.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ProfileActivity.class)));
         buttonLogout.setOnClickListener(v -> logoutUser());
 
-        // Check if user is logged in
         if (!FirebaseUtils.isLoggedIn()) {
             redirectToLogin();
         }
