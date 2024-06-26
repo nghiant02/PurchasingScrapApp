@@ -51,5 +51,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation (libs.picasso)
     implementation (libs.play.services.auth)
-
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 }

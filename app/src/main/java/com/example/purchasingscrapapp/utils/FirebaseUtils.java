@@ -110,4 +110,8 @@ public class FirebaseUtils {
                     });
         }
     }
+
+    public static FirebaseFirestore getFirestore() {
+        return db;
+    }
 }

@@ -1,9 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
 public class Scrap {
-    private int id;
-    private int userId;
-    private int categoryId;
+    private String id;
     private String name;
     private String description;
     private String imageUrl;
@@ -12,17 +10,14 @@ public class Scrap {
     private String unit;
     private String location;
     private String status;
-    private boolean isDonated;
     private long createdAt;
     private long updatedAt;
 
     public Scrap() {
     }
 
-    public Scrap(int id, int userId, int categoryId, String name, String description, String imageUrl, double referencePrice, int quantity, String unit, String location, String status, boolean isDonated, long createdAt, long updatedAt) {
+    public Scrap(String id, String name, String description, String imageUrl, double referencePrice, int quantity, String unit, String location, String status, long createdAt, long updatedAt) {
         this.id = id;
-        this.userId = userId;
-        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
@@ -31,33 +26,16 @@ public class Scrap {
         this.unit = unit;
         this.location = location;
         this.status = status;
-        this.isDonated = isDonated;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -122,14 +100,6 @@ public class Scrap {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public boolean isDonated() {
-        return isDonated;
-    }
-
-    public void setDonated(boolean donated) {
-        isDonated = donated;
     }
 
     public long getCreatedAt() {

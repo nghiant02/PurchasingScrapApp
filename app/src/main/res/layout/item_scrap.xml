@@ -1,46 +1,49 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="8dp">
+    android:orientation="vertical"
+    android:padding="16dp">
 
     <ImageView
         android:id="@+id/imageViewScrap"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:scaleType="centerCrop" />
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/textViewName"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageViewScrap"
-        android:layout_marginStart="8dp"
-        android:layout_alignTop="@id/imageViewScrap"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/textViewDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageViewScrap"
-        android:layout_marginStart="8dp"
-        android:layout_below="@id/textViewName" />
+        android:layout_marginTop="4dp"/>
 
     <TextView
         android:id="@+id/textViewQuantity"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageViewScrap"
-        android:layout_marginStart="8dp"
-        android:layout_below="@id/textViewDescription" />
+        android:layout_marginTop="4dp"/>
 
     <TextView
         android:id="@+id/textViewLocation"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/imageViewScrap"
-        android:layout_marginStart="8dp"
-        android:layout_below="@id/textViewQuantity" />
-</RelativeLayout>
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewReferencePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:id="@+id/textViewStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"/>
+</LinearLayout>
