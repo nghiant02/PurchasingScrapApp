@@ -1,37 +1,54 @@
-<!-- app/src/main/res/layout/activity_main.xml -->
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/buttonViewScraps"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Scraps"
-        android:layout_marginTop="16dp" />
+        android:orientation="vertical">
 
-    <Button
-        android:id="@+id/buttonPostScrap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Post Scrap"
-        android:layout_below="@id/buttonViewScraps"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/buttonScrapList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Danh Sách Phế Liệu" />
 
-    <Button
-        android:id="@+id/buttonProfile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:layout_below="@id/buttonPostScrap"
-        android:layout_marginTop="16dp" />
+        <Button
+            android:id="@+id/buttonSearchScrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tìm Kiếm và Lọc Phế Liệu" />
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_below="@id/buttonProfile"
-        android:layout_marginTop="16dp" />
-</RelativeLayout>
+        <Button
+            android:id="@+id/buttonPostScrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đăng Thông Tin Bán Phế Liệu" />
+
+        <Button
+            android:id="@+id/buttonChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Trò Chuyện Giữa Người Bán và Hệ Thống" />
+
+        <Button
+            android:id="@+id/buttonEvaluateScrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Đánh Giá Phế Liệu" />
+
+        <Button
+            android:id="@+id/buttonTrackScrap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Theo Dõi và Quản Lý Lô Phế Liệu" />
+
+        <Button
+            android:id="@+id/buttonAnalyzeData"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phân Tích Dữ Liệu" />
+    </LinearLayout>
+</ScrollView>
