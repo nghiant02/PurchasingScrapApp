@@ -9,14 +9,14 @@
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
+        android:hint="Tên"
         android:layout_marginTop="16dp"/>
 
     <EditText
         android:id="@+id/editTextPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Phone"
+        android:hint="Số điện thoại"
         android:layout_below="@id/editTextName"
         android:layout_marginTop="16dp"/>
 
@@ -33,7 +33,7 @@
         android:id="@+id/editTextPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
+        android:hint="Mật khẩu"
         android:inputType="textPassword"
         android:layout_below="@id/editTextEmail"
         android:layout_marginTop="16dp"/>
@@ -42,7 +42,7 @@
         android:id="@+id/editTextConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Confirm Password"
+        android:hint="Xác nhận mật khẩu"
         android:inputType="textPassword"
         android:layout_below="@id/editTextPassword"
         android:layout_marginTop="16dp"/>
@@ -51,7 +51,7 @@
         android:id="@+id/buttonRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="Đăng ký"
         android:layout_below="@id/editTextConfirmPassword"
         android:layout_marginTop="16dp" />
 
