@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+    android:layout_height="match_parent"
+    android:padding="16dp">
 
     <ImageView
-        android:id="@+id/scrapImageView"
+        android:id="@+id/imageView"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop" />
@@ -15,36 +14,42 @@
         android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16sp" />
+        android:layout_below="@id/imageView"
+        android:layout_marginTop="16dp"
+        android:text="Tên"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/descriptionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:layout_below="@id/nameTextView"
+        android:layout_marginTop="8dp"
+        android:text="Mô Tả" />
 
     <TextView
         android:id="@+id/priceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:layout_below="@id/descriptionTextView"
+        android:layout_marginTop="8dp"
+        android:text="Giá Tham Khảo" />
 
     <TextView
         android:id="@+id/quantityTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/unitTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="14sp" />
+        android:layout_below="@id/priceTextView"
+        android:layout_marginTop="8dp"
+        android:text="Số Lượng" />
 
     <TextView
         android:id="@+id/locationTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp" />
-</LinearLayout>
+        android:layout_below="@id/quantityTextView"
+        android:layout_marginTop="8dp"
+        android:text="Vị Trí" />
+
+</RelativeLayout>

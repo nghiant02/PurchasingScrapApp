@@ -1,72 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".activity.MainActivity">
+    android:padding="16dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/buttonViewScrapList"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:text="Xem Danh Sách Phế Liệu"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonScrapList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Danh Sách Phế Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonSearchScrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tìm Kiếm Phế Liệu"
+        android:layout_below="@id/buttonViewScrapList"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonSearchScrap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tìm Kiếm và Lọc Phế Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonPostScrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đăng Phế Liệu"
+        android:layout_below="@id/buttonSearchScrap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonPostScrap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đăng Thông Tin Bán Phế Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Trò Chuyện"
+        android:layout_below="@id/buttonPostScrap"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonChat"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Trò Chuyện Giữa Người Bán và Hệ Thống"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonPricing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Đánh Giá Phế Liệu"
+        android:layout_below="@id/buttonChat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonEvaluateScrap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Đánh Giá Phế Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonOrderManagement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quản Lý Lô Phế Liệu"
+        android:layout_below="@id/buttonPricing"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonTrackScrap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Theo Dõi và Quản Lý Lô Phế Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
+    <Button
+        android:id="@+id/buttonAnalytics"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phân Tích Dữ Liệu"
+        android:layout_below="@id/buttonOrderManagement"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/buttonAnalyzeData"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Phân Tích Dữ Liệu"
-            style="@style/Widget.MaterialComponents.Button"
-            android:layout_marginTop="16dp"/>
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

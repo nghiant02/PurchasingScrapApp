@@ -10,6 +10,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.PurchasingScrapApp"
+        android:enableOnBackInvokedCallback="true"
         tools:targetApi="31">
         <activity
             android:name=".activity.LoginActivity"
@@ -23,6 +24,9 @@
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.ForgotPasswordActivity" />
         <activity android:name=".activity.ScrapListActivity" />
+        <activity android:name=".activity.SearchScrapActivity" />
+        <activity android:name=".activity.PostScrapActivity" />
+        <activity android:name=".activity.ScrapDetailActivity" />
 
     </application>
 

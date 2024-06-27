@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.adapter.ScrapAdapter;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
@@ -16,7 +17,6 @@ public class ScrapListActivity extends AppCompatActivity {
     private RecyclerView recyclerViewScraps;
     private ScrapViewModel scrapViewModel;
     private ProgressBar progressBar;
-    private ScrapAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class ScrapListActivity extends AppCompatActivity {
         scrapViewModel.getScraps().observe(this, scraps -> {
             progressBar.setVisibility(View.GONE);
             if (scraps != null && !scraps.isEmpty()) {
-                adapter = new ScrapAdapter(scraps);
+                ScrapAdapter adapter = new ScrapAdapter(scraps);
                 recyclerViewScraps.setAdapter(adapter);
             } else {
                 // Handle empty list case
