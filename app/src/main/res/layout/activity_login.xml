@@ -1,54 +1,75 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:background="@drawable/login_background_image"
     tools:context=".activity.LoginActivity">
 
-    <EditText
-        android:id="@+id/editTextEmail"
+    <LinearLayout
+        android:id="@+id/ll_login_form"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:layout_marginTop="16dp"/>
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginRight="32dp"
+        android:background="@drawable/login_form_background"
+        android:elevation="4dp"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <EditText
-        android:id="@+id/editTextPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Mật khẩu"
-        android:inputType="textPassword"
-        android:layout_below="@id/editTextEmail"
-        android:layout_marginTop="16dp"/>
+        <EditText
+            android:id="@+id/editTextEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="10dp"
+            android:hint="Email"
+            android:inputType="textEmailAddress"
+            android:padding="12dp" />
 
-    <Button
-        android:id="@+id/buttonLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đăng nhập"
-        android:layout_below="@id/editTextPassword"
-        android:layout_marginTop="16dp" />
+        <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/edit_text_background"
+            android:drawableLeft="@drawable/ic_password"
+            android:drawablePadding="10dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="12dp" />
 
-    <Button
-        android:id="@+id/buttonRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Đăng ký"
-        android:layout_below="@id/buttonLogin"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:textColor="@android:color/holo_blue_dark"/>
+        <Button
+            android:id="@+id/buttonLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_background"
+            android:text="Login"
+            android:textColor="@android:color/white" />
 
-    <Button
-        android:id="@+id/buttonForgotPassword"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Quên mật khẩu?"
-        android:layout_below="@id/buttonRegister"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:textColor="@android:color/holo_blue_dark" />
+        <TextView
+            android:id="@+id/textViewForgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Forgot Password?"
+            android:textColor="@color/colorAccent" />
+
+        <TextView
+            android:id="@+id/textViewRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"
+            android:text="Don't have an account? Register"
+            android:textColor="@color/colorAccent" />
+    </LinearLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"

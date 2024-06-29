@@ -53,4 +53,6 @@ dependencies {
     implementation (libs.play.services.auth)
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
+    implementation (libs.material.v130)
+    implementation (libs.kenburnsview)
 }
