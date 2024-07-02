@@ -61,23 +61,23 @@
             android:text="Login"
             android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/textViewForgotPassword"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/buttonRegister"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="Forgot Password?"
-            android:textColor="@color/colorAccent" />
+            android:background="@drawable/button_background"
+            android:text="Register"
+            android:textColor="@android:color/white" />
 
-        <TextView
-            android:id="@+id/textViewRegister"
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/buttonForgotPassword"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="16dp"
-            android:text="Don't have an account? Register"
-            android:textColor="@color/colorAccent" />
+            android:background="@drawable/button_background"
+            android:text="Forgot Password"
+            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <ProgressBar
