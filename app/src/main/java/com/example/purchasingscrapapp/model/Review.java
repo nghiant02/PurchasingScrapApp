@@ -1,17 +1,16 @@
 package com.example.purchasingscrapapp.model;
 
 public class Review {
-    private int id;
-    private int orderId;
+    private String id;
+    private String orderId;
     private int rating;
     private String comment;
     private long createdAt;
     private long updatedAt;
 
-    public Review() {
-    }
+    public Review() {}
 
-    public Review(int id, int orderId, int rating, String comment, long createdAt, long updatedAt) {
+    public Review(String id, String orderId, int rating, String comment, long createdAt, long updatedAt) {
         this.id = id;
         this.orderId = orderId;
         this.rating = rating;
@@ -20,19 +19,19 @@ public class Review {
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 

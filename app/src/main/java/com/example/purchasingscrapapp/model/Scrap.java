@@ -1,31 +1,27 @@
 package com.example.purchasingscrapapp.model;
 
+import java.util.List;
+
 public class Scrap {
     private String id;
+    private String userId;
+    private String categoryId;
     private String name;
     private String description;
     private String imageUrl;
-    private double referencePrice;
-    private int quantity;
-    private String unit;
-    private String location;
-    private String status;
     private long createdAt;
     private long updatedAt;
 
-    public Scrap() {
-    }
+    // Default constructor for Firestore
+    public Scrap() {}
 
-    public Scrap(String id, String name, String description, String imageUrl, double referencePrice, int quantity, String unit, String location, String status, long createdAt, long updatedAt) {
+    public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, long createdAt, long updatedAt) {
         this.id = id;
+        this.userId = userId;
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
-        this.referencePrice = referencePrice;
-        this.quantity = quantity;
-        this.unit = unit;
-        this.location = location;
-        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -36,6 +32,22 @@ public class Scrap {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -60,46 +72,6 @@ public class Scrap {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    public double getReferencePrice() {
-        return referencePrice;
-    }
-
-    public void setReferencePrice(double referencePrice) {
-        this.referencePrice = referencePrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public long getCreatedAt() {

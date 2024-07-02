@@ -62,9 +62,7 @@ public class ScrapRepository {
 
     public void postScrap(Scrap scrap) {
         db.collection("scraps").add(scrap).addOnSuccessListener(documentReference -> {
-            // Handle success
         }).addOnFailureListener(e -> {
-            // Handle failure
         });
     }
 }

@@ -31,7 +31,6 @@ public class ScrapViewModel extends ViewModel {
 
             @Override
             public void onError(Exception e) {
-                // Handle error
             }
         });
     }
@@ -45,7 +44,6 @@ public class ScrapViewModel extends ViewModel {
 
             @Override
             public void onError(Exception e) {
-                // Handle error
             }
         });
     }
@@ -59,7 +57,6 @@ public class ScrapViewModel extends ViewModel {
 
             @Override
             public void onError(Exception e) {
-                // Handle error
             }
         });
     }

@@ -1,16 +1,15 @@
 package com.example.purchasingscrapapp.model;
 
 public class ScrapCategory {
-    private int id;
+    private String id;
     private String name;
     private String description;
     private long createdAt;
     private long updatedAt;
 
-    public ScrapCategory() {
-    }
+    public ScrapCategory() {}
 
-    public ScrapCategory(int id, String name, String description, long createdAt, long updatedAt) {
+    public ScrapCategory(String id, String name, String description, long createdAt, long updatedAt) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,11 +17,11 @@ public class ScrapCategory {
         this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

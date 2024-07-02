@@ -1,19 +1,18 @@
 package com.example.purchasingscrapapp.model;
 
 public class Order {
-    private int id;
-    private int buyerId;
-    private int sellerId;
-    private int scrapId;
+    private String id;
+    private String buyerId;
+    private String sellerId;
+    private String scrapId;
     private int quantity;
     private double totalPrice;
     private String status;
     private long timestamp;
 
-    public Order() {
-    }
+    public Order() {}
 
-    public Order(int id, int buyerId, int sellerId, int scrapId, int quantity, double totalPrice, String status, long timestamp) {
+    public Order(String id, String buyerId, String sellerId, String scrapId, int quantity, double totalPrice, String status, long timestamp) {
         this.id = id;
         this.buyerId = buyerId;
         this.sellerId = sellerId;
@@ -24,35 +23,35 @@ public class Order {
         this.timestamp = timestamp;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getBuyerId() {
+    public String getBuyerId() {
         return buyerId;
     }
 
-    public void setBuyerId(int buyerId) {
+    public void setBuyerId(String buyerId) {
         this.buyerId = buyerId;
     }
 
-    public int getSellerId() {
+    public String getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(String sellerId) {
         this.sellerId = sellerId;
     }
 
-    public int getScrapId() {
+    public String getScrapId() {
         return scrapId;
     }
 
-    public void setScrapId(int scrapId) {
+    public void setScrapId(String scrapId) {
         this.scrapId = scrapId;
     }
 

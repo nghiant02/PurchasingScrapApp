@@ -12,8 +12,7 @@ public class User {
     private long createdAt;
     private long updatedAt;
 
-    public User() {
-    }
+    public User() {}
 
     public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, long createdAt, long updatedAt) {
         this.id = id;

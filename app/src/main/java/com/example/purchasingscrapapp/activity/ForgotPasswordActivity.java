@@ -1,20 +1,25 @@
 package com.example.purchasingscrapapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.purchasingscrapapp.R;
-import com.example.purchasingscrapapp.utils.FirebaseUtils;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
+import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 
 public class ForgotPasswordActivity extends AppCompatActivity {
 
     private EditText emailEditText;
     private Button resetPasswordButton;
     private ProgressBar progressBar;
+    private UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +30,24 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         resetPasswordButton = findViewById(R.id.buttonResetPassword);
         progressBar = findViewById(R.id.progressBar);
 
-        resetPasswordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (ValidationUtils.isValidEmail(emailEditText)) {
-                    FirebaseUtils.resetPassword(ForgotPasswordActivity.this, emailEditText.getText().toString().trim(), progressBar, task -> {
-                        // Handle additional actions after password reset, if needed
-                    });
-                }
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        resetPasswordButton.setOnClickListener(v -> {
+            if (ValidationUtils.isValidEmail(emailEditText)) {
+                String email = emailEditText.getText().toString().trim();
+
+                userViewModel.resetPassword(this, email, progressBar).observe(this, aVoid -> {
+                    if (aVoid != null) {
+                        Toast.makeText(ForgotPasswordActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
+                        // Redirect to login screen
+                        Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
+                        startActivity(intent);
+                    } else {
+                        Toast.makeText(ForgotPasswordActivity.this, "Error sending password reset email.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            } else {
+                Toast.makeText(ForgotPasswordActivity.this, "Please enter a valid email.", Toast.LENGTH_SHORT).show();
             }
         });
     }
