@@ -11,10 +11,21 @@ public class ValidationUtils {
 
     public static boolean isValidPassword(EditText passwordEditText) {
         String password = passwordEditText.getText().toString().trim();
-        return password.length() >= 6;
+        return password.length() >= 6 && password.matches(".*\\d.*") && password.matches(".*[A-Z].*") && password.matches(".*[!@#$%^&*+=?-].*");
     }
 
     public static boolean isNotEmpty(EditText editText) {
         return editText.getText().toString().trim().length() > 0;
+    }
+
+    public static boolean isValidPhone(EditText phoneEditText) {
+        String phone = phoneEditText.getText().toString().trim();
+        return phone.matches("^0\\d{9}$");
+    }
+
+    public static boolean doPasswordsMatch(EditText passwordEditText, EditText confirmPasswordEditText) {
+        String password = passwordEditText.getText().toString().trim();
+        String confirmPassword = confirmPasswordEditText.getText().toString().trim();
+        return password.equals(confirmPassword);
     }
 }

@@ -40,21 +40,14 @@ public class RegisterActivity extends AppCompatActivity {
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
 
         registerButton.setOnClickListener(v -> {
-            if (ValidationUtils.isValidEmail(emailEditText) && ValidationUtils.isValidPassword(passwordEditText)) {
+            if (validateInputs()) {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
-                String confirmPassword = confirmPasswordEditText.getText().toString().trim();
                 String name = nameEditText.getText().toString().trim();
                 String phone = phoneEditText.getText().toString().trim();
 
-                if (!password.equals(confirmPassword)) {
-                    Toast.makeText(RegisterActivity.this, "Passwords do not match.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
                 userViewModel.registerUser(this, email, password, name, phone, progressBar).observe(this, authResult -> {
                     if (authResult != null) {
-                        // Registration success, redirect to login activity
                         Toast.makeText(RegisterActivity.this, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                         startActivity(intent);
@@ -62,11 +55,43 @@ public class RegisterActivity extends AppCompatActivity {
                         Toast.makeText(RegisterActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
-            } else {
-                Toast.makeText(RegisterActivity.this, "Please enter valid details.", Toast.LENGTH_SHORT).show();
             }
         });
 
         loginButton.setOnClickListener(v -> startActivity(new Intent(RegisterActivity.this, LoginActivity.class)));
+    }
+
+    private boolean validateInputs() {
+        if (!ValidationUtils.isNotEmpty(nameEditText)) {
+            nameEditText.setError("Name is required");
+            nameEditText.requestFocus();
+            return false;
+        }
+
+        if (!ValidationUtils.isValidEmail(emailEditText)) {
+            emailEditText.setError("Invalid email address");
+            emailEditText.requestFocus();
+            return false;
+        }
+
+        if (!ValidationUtils.isValidPhone(phoneEditText)) {
+            phoneEditText.setError("Invalid phone number. Must be 10 digits and start with a 0.");
+            phoneEditText.requestFocus();
+            return false;
+        }
+
+        if (!ValidationUtils.isValidPassword(passwordEditText)) {
+            passwordEditText.setError("Password must be at least 6 characters, contain at least one digit, one uppercase letter, and one special character");
+            passwordEditText.requestFocus();
+            return false;
+        }
+
+        if (!ValidationUtils.doPasswordsMatch(passwordEditText, confirmPasswordEditText)) {
+            confirmPasswordEditText.setError("Passwords do not match");
+            confirmPasswordEditText.requestFocus();
+            return false;
+        }
+
+        return true;
     }
 }
