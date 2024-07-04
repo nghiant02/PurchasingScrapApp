@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        findViewById(R.id.buttonViewScrapList).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ScrapListActivity.class)));
+        findViewById(R.id.buttonViewScrapList).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ScrapListActivity.class)));
 //
 //        findViewById(R.id.buttonSearchScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchScrapActivity.class)));
 //
