@@ -1,130 +1,106 @@
-//package com.example.purchasingscrapapp.activity;
-//
-//import android.app.Activity;
-//import android.content.Intent;
-//import android.net.Uri;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.widget.EditText;
-//import android.widget.ImageView;
-//import android.widget.ProgressBar;
-//import android.widget.Toast;
-//import androidx.annotation.Nullable;
-//import androidx.appcompat.app.AppCompatActivity;
-//import com.example.purchasingscrapapp.R;
-//import com.example.purchasingscrapapp.model.Scrap;
-//import com.example.purchasingscrapapp.repository.ScrapRepository;
-//import com.google.firebase.auth.FirebaseAuth;
-//import com.google.firebase.auth.FirebaseUser;
-//import com.google.firebase.storage.FirebaseStorage;
-//import com.google.firebase.storage.StorageReference;
-//import java.util.UUID;
-//
-//public class PostScrapActivity extends AppCompatActivity {
-//
-//    private static final int PICK_IMAGE_REQUEST = 1;
-//
-//    private EditText nameEditText, descriptionEditText, priceEditText, quantityEditText, unitEditText, locationEditText;
-//    private ImageView scrapImageView;
-//    private Uri imageUri;
-//    private ProgressBar progressBar;
-//    private ScrapRepository scrapRepository;
-//    private FirebaseStorage storage;
-//    private FirebaseAuth auth;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_post_scrap);
-//
-//        auth = FirebaseAuth.getInstance();
-//        FirebaseUser currentUser = auth.getCurrentUser();
-//
-//        if (currentUser == null) {
-//            // Redirect to login screen if user is not authenticated
-//            Intent intent = new Intent(this, LoginActivity.class);
-//            startActivity(intent);
-//            finish();
-//            return;
-//        }
-//
-//        nameEditText = findViewById(R.id.editTextName);
-//        descriptionEditText = findViewById(R.id.editTextDescription);
-//        priceEditText = findViewById(R.id.editTextReferencePrice);
-//        quantityEditText = findViewById(R.id.editTextQuantity);
-//        unitEditText = findViewById(R.id.editTextUnit);
-//        locationEditText = findViewById(R.id.editTextLocation);
-//        scrapImageView = findViewById(R.id.scrapImageView);
-//        progressBar = findViewById(R.id.progressBar);
-//
-//        scrapRepository = new ScrapRepository();
-//        storage = FirebaseStorage.getInstance();
-//
-//        findViewById(R.id.chooseImageButton).setOnClickListener(v -> chooseImage());
-//        findViewById(R.id.postScrapButton).setOnClickListener(v -> postScrap());
-//    }
-//
-//    private void chooseImage() {
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(intent, PICK_IMAGE_REQUEST);
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.getData() != null) {
-//            imageUri = data.getData();
-//            scrapImageView.setImageURI(imageUri);
-//        }
-//    }
-//
-//    private void postScrap() {
-//        String name = nameEditText.getText().toString().trim();
-//        String description = descriptionEditText.getText().toString().trim();
-//        String priceString = priceEditText.getText().toString().trim();
-//        String quantityString = quantityEditText.getText().toString().trim();
-//        String unit = unitEditText.getText().toString().trim();
-//        String location = locationEditText.getText().toString().trim();
-//
-//        if (name.isEmpty() || description.isEmpty() || priceString.isEmpty() || quantityString.isEmpty() || unit.isEmpty() || location.isEmpty() || imageUri == null) {
-//            Toast.makeText(this, "Please fill all fields and choose an image", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        double price;
-//        int quantity;
-//        try {
-//            price = Double.parseDouble(priceString);
-//            quantity = Integer.parseInt(quantityString);
-//        } catch (NumberFormatException e) {
-//            Toast.makeText(this, "Invalid price or quantity", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
-//
-//        progressBar.setVisibility(View.VISIBLE);
-//        StorageReference storageReference = storage.getReference("scrap_images/" + UUID.randomUUID().toString());
-//        storageReference.putFile(imageUri).addOnSuccessListener(taskSnapshot -> storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
-//            Scrap scrap = new Scrap(
-//                    UUID.randomUUID().toString(),
-//                    name,
-//                    description,
-//                    uri.toString(),
-//                    price,
-//                    quantity,
-//                    unit,
-//                    location,
-//                    "available",
-//                    System.currentTimeMillis(),
-//                    System.currentTimeMillis()
-//            );
-//            scrapRepository.postScrap(scrap);
-//            progressBar.setVisibility(View.GONE);
-//            finish();
-//        })).addOnFailureListener(e -> {
-//            progressBar.setVisibility(View.GONE);
-//            Toast.makeText(this, "Failed to upload image: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-//        });
-//    }
-//}
+package com.example.purchasingscrapapp.activity;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.example.purchasingscrapapp.R;
+import com.example.purchasingscrapapp.model.Scrap;
+import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
+
+public class PostScrapActivity extends AppCompatActivity {
+
+    private static final int PICK_IMAGE_REQUEST = 1;
+
+    private EditText editTextScrapName, editTextScrapDescription, editTextScrapLocation;
+    private Spinner spinnerCategory;
+    private ImageView imageViewScrap;
+    private Button buttonSelectImage, buttonPostScrap;
+    private ProgressBar progressBar;
+
+    private Uri imageUri;
+    private ScrapViewModel scrapViewModel;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_post_scrap);
+
+        editTextScrapName = findViewById(R.id.editTextScrapName);
+        editTextScrapDescription = findViewById(R.id.editTextScrapDescription);
+        editTextScrapLocation = findViewById(R.id.editTextScrapLocation);
+        spinnerCategory = findViewById(R.id.spinnerCategory);
+        imageViewScrap = findViewById(R.id.imageViewScrap);
+        buttonSelectImage = findViewById(R.id.buttonSelectImage);
+        buttonPostScrap = findViewById(R.id.buttonPostScrap);
+        progressBar = findViewById(R.id.progressBar);
+
+        scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.scrap_categories, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerCategory.setAdapter(adapter);
+
+        buttonSelectImage.setOnClickListener(v -> openFileChooser());
+        buttonPostScrap.setOnClickListener(v -> postScrap());
+    }
+
+    private void openFileChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, PICK_IMAGE_REQUEST);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+            imageViewScrap.setImageURI(imageUri);
+        }
+    }
+
+    private void postScrap() {
+        String name = editTextScrapName.getText().toString().trim();
+        String description = editTextScrapDescription.getText().toString().trim();
+        String location = editTextScrapLocation.getText().toString().trim();
+        String category = spinnerCategory.getSelectedItem().toString();
+
+        if (name.isEmpty() || description.isEmpty() || location.isEmpty()) {
+            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Scrap scrap = new Scrap();
+        scrap.setName(name);
+        scrap.setDescription(description);
+        scrap.setLocation(location);
+        scrap.setCategoryId(category);
+
+        progressBar.setVisibility(View.VISIBLE);
+
+        scrapViewModel.postScrap(scrap, imageUri).observe(this, success -> {
+            progressBar.setVisibility(View.GONE);
+            if (success) {
+                Toast.makeText(PostScrapActivity.this, "Scrap posted successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(PostScrapActivity.this, "Failed to post scrap", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+}

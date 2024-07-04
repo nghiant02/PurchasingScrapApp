@@ -9,19 +9,20 @@ public class Scrap {
     private String name;
     private String description;
     private String imageUrl;
+    private String location;
     private long createdAt;
     private long updatedAt;
 
-    // Default constructor for Firestore
     public Scrap() {}
 
-    public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, long createdAt, long updatedAt) {
+    public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, String location, long createdAt, long updatedAt) {
         this.id = id;
         this.userId = userId;
         this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+        this.location = location;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -72,6 +73,14 @@ public class Scrap {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public long getCreatedAt() {

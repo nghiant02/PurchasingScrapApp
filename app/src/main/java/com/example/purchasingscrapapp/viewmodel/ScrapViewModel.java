@@ -1,5 +1,7 @@
 package com.example.purchasingscrapapp.viewmodel;
 
+import android.net.Uri;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -34,5 +36,13 @@ public class ScrapViewModel extends ViewModel {
 
     public void searchAndFilterScraps(String query, String type, String location) {
         scrapRepository.searchAndFilterScraps(query, type, location);
+    }
+
+    public LiveData<Boolean> postScrap(Scrap scrap, Uri imageUri) {
+        return scrapRepository.postScrap(scrap, imageUri);
+    }
+
+    public LiveData<List<Scrap>> getScraps() {
+        return scrapRepository.getScraps();
     }
 }
