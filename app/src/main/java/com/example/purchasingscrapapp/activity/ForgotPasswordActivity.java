@@ -37,14 +37,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
 
                 userViewModel.resetPassword(this, email, progressBar).observe(this, aVoid -> {
-                    if (aVoid != null) {
-                        Toast.makeText(ForgotPasswordActivity.this, "Password reset email sent.", Toast.LENGTH_SHORT).show();
-                        // Redirect to login screen
-                        Intent intent = new Intent(ForgotPasswordActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                    } else {
-                        Toast.makeText(ForgotPasswordActivity.this, "Error sending password reset email.", Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(ForgotPasswordActivity.this, "Error sending password reset email.", Toast.LENGTH_SHORT).show();
                 });
             } else {
                 Toast.makeText(ForgotPasswordActivity.this, "Please enter a valid email.", Toast.LENGTH_SHORT).show();

@@ -1,66 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/edit_text_scrap_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:hint="Scrap Name" />
 
-        <EditText
-            android:id="@+id/editTextScrapName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Scrap Name" />
+    <EditText
+        android:id="@+id/edit_text_scrap_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Scrap Description"
+        android:layout_below="@id/edit_text_scrap_name"
+        android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/editTextScrapDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Description" />
+    <EditText
+        android:id="@+id/edit_text_scrap_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:layout_below="@id/edit_text_scrap_description"
+        android:layout_marginTop="8dp" />
 
-        <EditText
-            android:id="@+id/editTextScrapLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Location" />
+    <Button
+        android:id="@+id/button_post_scrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Scrap"
+        android:layout_below="@id/edit_text_scrap_location"
+        android:layout_marginTop="16dp"
+        android:layout_alignParentEnd="true" />
 
-        <Spinner
-            android:id="@+id/spinnerCategory"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp" />
-
-        <ImageView
-            android:id="@+id/imageViewScrap"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginTop="16dp"
-            android:scaleType="centerCrop"
-            android:background="#e0e0e0"
-            android:contentDescription="Scrap Image" />
-
-        <Button
-            android:id="@+id/buttonSelectImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Select Image" />
-
-        <Button
-            android:id="@+id/buttonPostScrap"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Post Scrap" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:visibility="gone" />
-    </LinearLayout>
-</ScrollView>
+</RelativeLayout>

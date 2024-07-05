@@ -1,8 +1,7 @@
 package com.example.purchasingscrapapp.viewmodel;
 
-import android.net.Uri;
-
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.purchasingscrapapp.model.Scrap;
@@ -12,37 +11,38 @@ import java.util.List;
 
 public class ScrapViewModel extends ViewModel {
 
-    private ScrapRepository scrapRepository;
-    private LiveData<List<Scrap>> scrapListLiveData;
-    private LiveData<List<Scrap>> filteredScrapListLiveData;
+    private final ScrapRepository scrapRepository;
+    private final MutableLiveData<List<Scrap>> scrapList;
 
     public ScrapViewModel() {
         scrapRepository = new ScrapRepository();
-        scrapListLiveData = scrapRepository.getScrapList();
-        filteredScrapListLiveData = scrapRepository.getFilteredScrapList();
+        scrapList = scrapRepository.getScrapList();
     }
 
     public LiveData<List<Scrap>> getScrapList() {
-        return scrapListLiveData;
+        return scrapList;
     }
 
     public void fetchScraps() {
-        scrapRepository.fetchScraps();
+        scrapRepository.getScrapList().observeForever(scrapList::setValue);
     }
 
-    public LiveData<List<Scrap>> getFilteredScrapList() {
-        return filteredScrapListLiveData;
+    public LiveData<List<Scrap>> searchScrap(String query) {
+        MutableLiveData<List<Scrap>> searchResults = new MutableLiveData<>();
+        scrapRepository.searchScrap(query).observeForever(searchResults::setValue);
+        return searchResults;
     }
 
-    public void searchAndFilterScraps(String query, String type, String location) {
-        scrapRepository.searchAndFilterScraps(query, type, location);
+    public void postScrap(Scrap scrap) {
+        scrapRepository.postScrap(scrap);
     }
 
-    public LiveData<Boolean> postScrap(Scrap scrap, Uri imageUri) {
-        return scrapRepository.postScrap(scrap, imageUri);
+    public void updateScrap(Scrap scrap) {
+        scrapRepository.updateScrap(scrap);
     }
 
-    public LiveData<List<Scrap>> getScraps() {
-        return scrapRepository.getScraps();
+    public void deleteScrap(Scrap scrap) {
+        scrapRepository.deleteScrap(scrap);
     }
+
 }

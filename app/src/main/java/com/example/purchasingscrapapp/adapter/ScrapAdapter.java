@@ -5,10 +5,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
@@ -30,7 +28,9 @@ public class ScrapAdapter extends RecyclerView.Adapter<ScrapAdapter.ScrapViewHol
     @Override
     public void onBindViewHolder(@NonNull ScrapViewHolder holder, int position) {
         Scrap scrap = scrapList.get(position);
-        holder.bind(scrap);
+        holder.nameTextView.setText(scrap.getName());
+        holder.descriptionTextView.setText(scrap.getDescription());
+        Glide.with(holder.imageView.getContext()).load(scrap.getImageUrl()).into(holder.imageView);
     }
 
     @Override
@@ -38,28 +38,21 @@ public class ScrapAdapter extends RecyclerView.Adapter<ScrapAdapter.ScrapViewHol
         return scrapList.size();
     }
 
-    public void setScrapList(List<Scrap> scraps) {
-        this.scrapList = scraps;
+    public void setScrapList(List<Scrap> scrapList) {
+        this.scrapList = scrapList;
         notifyDataSetChanged();
     }
 
     static class ScrapViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView;
+        TextView descriptionTextView;
+        ImageView imageView;
 
-        private ImageView scrapImage;
-        private TextView scrapName;
-        private TextView scrapDescription;
-
-        public ScrapViewHolder(@NonNull View itemView) {
+        ScrapViewHolder(@NonNull View itemView) {
             super(itemView);
-            scrapImage = itemView.findViewById(R.id.scrapImage);
-            scrapName = itemView.findViewById(R.id.scrapName);
-            scrapDescription = itemView.findViewById(R.id.scrapDescription);
-        }
-
-        public void bind(Scrap scrap) {
-            scrapName.setText(scrap.getName());
-            scrapDescription.setText(scrap.getDescription());
-            Glide.with(scrapImage.getContext()).load(scrap.getImageUrl()).into(scrapImage);
+            nameTextView = itemView.findViewById(R.id.text_view_scrap_name);
+            descriptionTextView = itemView.findViewById(R.id.text_view_scrap_description);
+            imageView = itemView.findViewById(R.id.image_view_scrap);
         }
     }
 }

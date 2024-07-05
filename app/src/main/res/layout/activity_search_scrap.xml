@@ -1,48 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/editTextSearch"
+    <SearchView
+        android:id="@+id/search_view_scrap"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Search scrap"
-        android:padding="12dp"
-        android:background="@drawable/edit_text_background" />
-
-    <Spinner
-        android:id="@+id/spinnerType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="12dp"
-        android:background="@drawable/spinner_background" />
-
-    <Spinner
-        android:id="@+id/spinnerLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:padding="12dp"
-        android:background="@drawable/spinner_background" />
-
-    <Button
-        android:id="@+id/buttonSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Search"
-        android:background="@drawable/button_background"
-        android:textColor="@android:color/white" />
+        android:queryHint="Search for scraps" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewScrap"
+        android:id="@+id/recycler_view_search_scrap"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:layout_marginTop="8dp" />
+        android:layout_height="match_parent"
+        android:layout_below="@id/search_view_scrap"
+        android:padding="16dp" />
 
-</LinearLayout>
+</RelativeLayout>

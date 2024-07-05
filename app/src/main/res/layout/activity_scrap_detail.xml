@@ -4,52 +4,44 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:id="@+id/nameTextView"
+    <EditText
+        android:id="@+id/edit_text_scrap_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/imageView"
+        android:hint="Scrap Name" />
+
+    <EditText
+        android:id="@+id/edit_text_scrap_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Scrap Description"
+        android:layout_below="@id/edit_text_scrap_name"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/edit_text_scrap_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        android:layout_below="@id/edit_text_scrap_description"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/button_update_scrap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Scrap"
+        android:layout_below="@id/edit_text_scrap_location"
         android:layout_marginTop="16dp"
-        android:text="Tên"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:layout_alignParentEnd="true" />
 
-    <TextView
-        android:id="@+id/descriptionTextView"
-        android:layout_width="match_parent"
+    <Button
+        android:id="@+id/button_delete_scrap"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nameTextView"
+        android:text="Delete Scrap"
+        android:layout_below="@id/button_update_scrap"
         android:layout_marginTop="8dp"
-        android:text="Mô Tả" />
-
-    <TextView
-        android:id="@+id/priceTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/descriptionTextView"
-        android:layout_marginTop="8dp"
-        android:text="Giá Tham Khảo" />
-
-    <TextView
-        android:id="@+id/quantityTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/priceTextView"
-        android:layout_marginTop="8dp"
-        android:text="Số Lượng" />
-
-    <TextView
-        android:id="@+id/locationTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/quantityTextView"
-        android:layout_marginTop="8dp"
-        android:text="Vị Trí" />
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
