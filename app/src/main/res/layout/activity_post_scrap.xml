@@ -40,13 +40,6 @@
         android:layout_marginTop="16dp"
         android:contentDescription="Scrap Image" />
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone" />
-
     <Button
         android:id="@+id/button_select_image"
         android:layout_width="wrap_content"
@@ -64,4 +57,11 @@
         android:layout_below="@id/image_view_scrap"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
 </RelativeLayout>

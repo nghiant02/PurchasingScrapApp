@@ -100,6 +100,7 @@ public class ScrapDetailActivity extends AppCompatActivity {
         scrap.setDescription(description);
         scrap.setLocation(location);
         scrap.setCategoryId(categoryId);
+        scrap.setUpdatedAt(System.currentTimeMillis()); // Set updatedAt
 
         // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
