@@ -1,6 +1,8 @@
 package com.example.purchasingscrapapp.model;
 
-public class Review {
+import java.io.Serializable;
+
+public class Review implements Serializable {
     private String id;
     private String orderId;
     private int rating;
@@ -8,7 +10,8 @@ public class Review {
     private long createdAt;
     private long updatedAt;
 
-    public Review() {}
+    public Review() {
+    }
 
     public Review(String id, String orderId, int rating, String comment, long createdAt, long updatedAt) {
         this.id = id;

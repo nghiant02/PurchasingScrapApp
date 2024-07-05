@@ -1,6 +1,8 @@
 package com.example.purchasingscrapapp.model;
 
-public class Order {
+import java.io.Serializable;
+
+public class Order implements Serializable {
     private String id;
     private String buyerId;
     private String sellerId;
@@ -10,7 +12,8 @@ public class Order {
     private String status;
     private long timestamp;
 
-    public Order() {}
+    public Order() {
+    }
 
     public Order(String id, String buyerId, String sellerId, String scrapId, int quantity, double totalPrice, String status, long timestamp) {
         this.id = id;

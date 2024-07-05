@@ -1,13 +1,16 @@
 package com.example.purchasingscrapapp.model;
 
-public class ScrapCategory {
+import java.io.Serializable;
+
+public class ScrapCategory implements Serializable {
     private String id;
     private String name;
     private String description;
     private long createdAt;
     private long updatedAt;
 
-    public ScrapCategory() {}
+    public ScrapCategory() {
+    }
 
     public ScrapCategory(String id, String name, String description, long createdAt, long updatedAt) {
         this.id = id;

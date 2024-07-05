@@ -1,13 +1,16 @@
 package com.example.purchasingscrapapp.model;
 
-public class Message {
+import java.io.Serializable;
+
+public class Message implements Serializable {
     private String id;
     private String fromUserId;
     private String toUserId;
     private String content;
     private long timestamp;
 
-    public Message() {}
+    public Message() {
+    }
 
     public Message(String id, String fromUserId, String toUserId, String content, long timestamp) {
         this.id = id;

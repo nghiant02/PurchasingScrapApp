@@ -1,6 +1,8 @@
 package com.example.purchasingscrapapp.model;
 
-public class Notification {
+import java.io.Serializable;
+
+public class Notification implements Serializable {
     private String id;
     private String userId;
     private String message;
@@ -8,7 +10,8 @@ public class Notification {
     private long createdAt;
     private long updatedAt;
 
-    public Notification() {}
+    public Notification() {
+    }
 
     public Notification(String id, String userId, String message, boolean isRead, long createdAt, long updatedAt) {
         this.id = id;
@@ -47,8 +50,8 @@ public class Notification {
         return isRead;
     }
 
-    public void setRead(boolean read) {
-        isRead = read;
+    public void setRead(boolean isRead) {
+        this.isRead = isRead;
     }
 
     public long getCreatedAt() {

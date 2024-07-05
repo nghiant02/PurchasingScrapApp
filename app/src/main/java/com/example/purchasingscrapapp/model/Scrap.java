@@ -1,7 +1,6 @@
 package com.example.purchasingscrapapp.model;
 
 import java.io.Serializable;
-import java.util.List;
 
 public class Scrap implements Serializable {
     private String id;
@@ -14,7 +13,8 @@ public class Scrap implements Serializable {
     private long createdAt;
     private long updatedAt;
 
-    public Scrap() {}
+    public Scrap() {
+    }
 
     public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, String location, long createdAt, long updatedAt) {
         this.id = id;
