@@ -15,11 +15,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.buttonViewScrapList).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ScrapListActivity.class)));
-//
-//        findViewById(R.id.buttonSearchScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchScrapActivity.class)));
-//
-//        findViewById(R.id.buttonPostScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PostScrapActivity.class)));
-//
+
+        findViewById(R.id.buttonSearchScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SearchScrapActivity.class)));
+
+        findViewById(R.id.buttonPostScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PostScrapActivity.class)));
+
 //        findViewById(R.id.buttonChat).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ChatActivity.class)));
 //
 //        findViewById(R.id.buttonPricing).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PricingActivity.class)));
