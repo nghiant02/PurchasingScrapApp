@@ -1,8 +1,9 @@
 package com.example.purchasingscrapapp.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Scrap {
+public class Scrap implements Serializable {
     private String id;
     private String userId;
     private String categoryId;

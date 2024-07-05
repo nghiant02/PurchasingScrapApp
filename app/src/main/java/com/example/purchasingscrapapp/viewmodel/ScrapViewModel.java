@@ -5,44 +5,40 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.purchasingscrapapp.model.Scrap;
+import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.repository.ScrapRepository;
 
 import java.util.List;
 
 public class ScrapViewModel extends ViewModel {
 
-    private final ScrapRepository scrapRepository;
-    private final MutableLiveData<List<Scrap>> scrapList;
+    private ScrapRepository scrapRepository;
+    private LiveData<List<Scrap>> allScraps;
+    private LiveData<List<ScrapCategory>> scrapCategories;
 
     public ScrapViewModel() {
         scrapRepository = new ScrapRepository();
-        scrapList = scrapRepository.getScrapList();
+        allScraps = scrapRepository.getAllScraps();
+        scrapCategories = scrapRepository.getScrapCategories();
     }
 
-    public LiveData<List<Scrap>> getScrapList() {
-        return scrapList;
+    public LiveData<List<Scrap>> getAllScraps() {
+        return allScraps;
     }
 
-    public void fetchScraps() {
-        scrapRepository.getScrapList().observeForever(scrapList::setValue);
+    public LiveData<List<ScrapCategory>> getScrapCategories() {
+        return scrapCategories;
     }
 
-    public LiveData<List<Scrap>> searchScrap(String query) {
-        MutableLiveData<List<Scrap>> searchResults = new MutableLiveData<>();
-        scrapRepository.searchScrap(query).observeForever(searchResults::setValue);
-        return searchResults;
+    public LiveData<Boolean> postScrap(Scrap scrap) {
+        return scrapRepository.postScrap(scrap);
     }
 
-    public void postScrap(Scrap scrap) {
-        scrapRepository.postScrap(scrap);
+    public LiveData<Boolean> updateScrap(Scrap scrap) {
+        return scrapRepository.updateScrap(scrap);
     }
 
-    public void updateScrap(Scrap scrap) {
-        scrapRepository.updateScrap(scrap);
+    public LiveData<Boolean> deleteScrap(String scrapId) {
+        return scrapRepository.deleteScrap(scrapId);
     }
-
-    public void deleteScrap(Scrap scrap) {
-        scrapRepository.deleteScrap(scrap);
-    }
-
 }

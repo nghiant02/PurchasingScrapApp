@@ -5,8 +5,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.bumptech.glide.Glide;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
@@ -14,45 +16,65 @@ import com.example.purchasingscrapapp.model.Scrap;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScrapAdapter extends RecyclerView.Adapter<ScrapAdapter.ScrapViewHolder> {
+public class ScrapAdapter extends RecyclerView.Adapter<ScrapAdapter.ScrapHolder> {
 
-    private List<Scrap> scrapList = new ArrayList<>();
+    private List<Scrap> scraps = new ArrayList<>();
+    private OnScrapClickListener listener;
+
+    public ScrapAdapter(OnScrapClickListener listener) {
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
-    public ScrapViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_scrap, parent, false);
-        return new ScrapViewHolder(view);
+    public ScrapHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_scrap, parent, false);
+        return new ScrapHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScrapViewHolder holder, int position) {
-        Scrap scrap = scrapList.get(position);
-        holder.nameTextView.setText(scrap.getName());
-        holder.descriptionTextView.setText(scrap.getDescription());
-        Glide.with(holder.imageView.getContext()).load(scrap.getImageUrl()).into(holder.imageView);
+    public void onBindViewHolder(@NonNull ScrapHolder holder, int position) {
+        Scrap currentScrap = scraps.get(position);
+        holder.textViewName.setText(currentScrap.getName());
+        holder.textViewDescription.setText(currentScrap.getDescription());
+        holder.textViewLocation.setText(currentScrap.getLocation());
+        Glide.with(holder.itemView.getContext()).load(currentScrap.getImageUrl()).into(holder.imageViewScrap);
     }
 
     @Override
     public int getItemCount() {
-        return scrapList.size();
+        return scraps.size();
     }
 
-    public void setScrapList(List<Scrap> scrapList) {
-        this.scrapList = scrapList;
+    public void setScraps(List<Scrap> scraps) {
+        this.scraps = scraps;
         notifyDataSetChanged();
     }
 
-    static class ScrapViewHolder extends RecyclerView.ViewHolder {
-        TextView nameTextView;
-        TextView descriptionTextView;
-        ImageView imageView;
+    class ScrapHolder extends RecyclerView.ViewHolder {
+        private TextView textViewName;
+        private TextView textViewDescription;
+        private TextView textViewLocation;
+        private ImageView imageViewScrap;
 
-        ScrapViewHolder(@NonNull View itemView) {
+        public ScrapHolder(@NonNull View itemView) {
             super(itemView);
-            nameTextView = itemView.findViewById(R.id.text_view_scrap_name);
-            descriptionTextView = itemView.findViewById(R.id.text_view_scrap_description);
-            imageView = itemView.findViewById(R.id.image_view_scrap);
+            textViewName = itemView.findViewById(R.id.text_view_name);
+            textViewDescription = itemView.findViewById(R.id.text_view_description);
+            textViewLocation = itemView.findViewById(R.id.text_view_location);
+            imageViewScrap = itemView.findViewById(R.id.image_view_scrap);
+
+            itemView.setOnClickListener(v -> {
+                int position = getAdapterPosition();
+                if (listener != null && position != RecyclerView.NO_POSITION) {
+                    listener.onScrapClick(scraps.get(position));
+                }
+            });
         }
+    }
+
+    public interface OnScrapClickListener {
+        void onScrapClick(Scrap scrap);
     }
 }
