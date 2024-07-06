@@ -22,6 +22,7 @@ import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -155,6 +156,10 @@ public class PostScrapActivity extends AppCompatActivity {
         scrap.setCategoryId(categoryId);
         scrap.setImageUrl(imageUrl);
         scrap.setCreatedAt(System.currentTimeMillis()); // Set createdAt
+
+        // Set userId from current user
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        scrap.setUserId(userId);
 
         scrapViewModel.postScrap(scrap).observe(this, success -> {
             progressBar.setVisibility(View.GONE);
