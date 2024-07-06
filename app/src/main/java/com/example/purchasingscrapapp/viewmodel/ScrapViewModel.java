@@ -29,6 +29,10 @@ public class ScrapViewModel extends ViewModel {
         return scrapCategories;
     }
 
+    public LiveData<List<Scrap>> getScrapsByUser(String userId) {
+        return scrapRepository.getScrapsByUser(userId);
+    }
+
     public LiveData<Boolean> postScrap(Scrap scrap) {
         return scrapRepository.postScrap(scrap);
     }

@@ -1,6 +1,5 @@
 package com.example.purchasingscrapapp.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,12 +16,11 @@ import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.adapter.ScrapAdapter;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter.OnScrapClickListener {
+public class StaffScrapListActivity extends AppCompatActivity implements ScrapAdapter.OnScrapClickListener {
 
     private ScrapViewModel scrapViewModel;
     private ScrapAdapter scrapAdapter;
@@ -30,12 +28,11 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
     private EditText editTextSearch;
     private ProgressBar progressBar;
     private List<Scrap> scrapList = new ArrayList<>();
-    private String currentUserId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrap_list);
+        setContentView(R.layout.activity_staff_scrap_list);
 
         editTextSearch = findViewById(R.id.edit_text_search);
         recyclerViewScrapList = findViewById(R.id.recycler_view_scrap_list);
@@ -49,13 +46,11 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
 
         scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
 
-        currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
         // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
         recyclerViewScrapList.setVisibility(View.GONE);
 
-        scrapViewModel.getScrapsByUser(currentUserId).observe(this, scraps -> {
+        scrapViewModel.getAllScraps().observe(this, scraps -> {
             scrapList = scraps;
             scrapAdapter.setScraps(scraps);
 
@@ -90,8 +85,6 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
 
     @Override
     public void onScrapClick(Scrap scrap) {
-        Intent intent = new Intent(ScrapListActivity.this, ScrapDetailActivity.class);
-        intent.putExtra("scrap", scrap);  // Pass as Serializable
-        startActivity(intent);
+        // Handle click if necessary
     }
 }

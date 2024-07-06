@@ -7,11 +7,8 @@ import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,23 @@ public class ScrapRepository {
     public LiveData<List<Scrap>> getAllScraps() {
         MutableLiveData<List<Scrap>> scrapsData = new MutableLiveData<>();
         scrapsRef.addSnapshotListener((value, error) -> {
+            if (error != null) {
+                return;
+            }
+            List<Scrap> scraps = new ArrayList<>();
+            for (QueryDocumentSnapshot document : value) {
+                Scrap scrap = document.toObject(Scrap.class);
+                scrap.setId(document.getId());
+                scraps.add(scrap);
+            }
+            scrapsData.setValue(scraps);
+        });
+        return scrapsData;
+    }
+
+    public LiveData<List<Scrap>> getScrapsByUser(String userId) {
+        MutableLiveData<List<Scrap>> scrapsData = new MutableLiveData<>();
+        scrapsRef.whereEqualTo("userId", userId).addSnapshotListener((value, error) -> {
             if (error != null) {
                 return;
             }
@@ -59,18 +73,7 @@ public class ScrapRepository {
     public LiveData<Boolean> postScrap(Scrap scrap) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
         scrap.setCreatedAt(System.currentTimeMillis());
-        scrap.setUserId(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        scrapsRef.add(scrap).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                String documentId = task.getResult().getId();
-                scrap.setId(documentId);
-                scrapsRef.document(documentId).set(scrap).addOnCompleteListener(updateTask -> {
-                    successData.setValue(updateTask.isSuccessful());
-                });
-            } else {
-                successData.setValue(false);
-            }
-        });
+        scrapsRef.add(scrap).addOnCompleteListener(task -> successData.setValue(task.isSuccessful()));
         return successData;
     }
 

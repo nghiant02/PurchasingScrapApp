@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,71 +7,29 @@
         android:id="@+id/buttonViewScrapList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Xem Danh Sách Phế Liệu"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-<!--    <Button-->
-<!--        android:id="@+id/buttonSearchScrap"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Tìm Kiếm Phế Liệu"-->
-<!--        android:layout_below="@id/buttonViewScrapList"-->
-<!--        android:layout_centerHorizontal="true"-->
-<!--        android:layout_marginTop="16dp"/>-->
+        android:text="View My Scraps" />
 
     <Button
         android:id="@+id/buttonPostScrap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Đăng Phế Liệu"
+        android:text="Post Scrap"
         android:layout_below="@id/buttonViewScrapList"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/buttonChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Trò Chuyện"
-        android:layout_below="@id/buttonPostScrap"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/buttonPricing"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Đánh Giá Phế Liệu"
-        android:layout_below="@id/buttonChat"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/buttonOrderManagement"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Quản Lý Lô Phế Liệu"
-        android:layout_below="@id/buttonPricing"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/buttonAnalytics"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Phân Tích Dữ Liệu"
-        android:layout_below="@id/buttonOrderManagement"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/buttonSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/buttonAnalytics"
-        android:layout_centerHorizontal="true"
         android:text="Sign Out"
-        android:layout_marginTop="16dp"/>
+        android:layout_below="@id/buttonPostScrap"
+        android:layout_marginTop="16dp" />
 
+    <Button
+        android:id="@+id/buttonStaffScrapList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View All Scraps"
+        android:layout_below="@id/buttonSignOut"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>
