@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.purchasingscrapapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -21,6 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
         findViewById(R.id.buttonPostScrap).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PostScrapActivity.class)));
 
+        findViewById(R.id.buttonSignOut).setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+        });
+
 //        findViewById(R.id.buttonChat).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, ChatActivity.class)));
 //
 //        findViewById(R.id.buttonPricing).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, PricingActivity.class)));
@@ -28,13 +33,5 @@ public class MainActivity extends AppCompatActivity {
 //        findViewById(R.id.buttonOrderManagement).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, OrderManagementActivity.class)));
 //
 //        findViewById(R.id.buttonAnalytics).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, AnalyticsActivity.class)));
-
-        findViewById(R.id.buttonSignOut).setOnClickListener(v -> signOut());
-    }
-
-    private void signOut() {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-        finish();
     }
 }
