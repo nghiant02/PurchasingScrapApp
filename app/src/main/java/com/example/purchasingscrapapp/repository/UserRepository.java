@@ -6,6 +6,7 @@ import android.widget.ProgressBar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.purchasingscrapapp.model.User;
 import com.example.purchasingscrapapp.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +22,17 @@ public class UserRepository {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
+                    // After successful registration, create additional fields in Firestore
+                    String userId = task.getResult().getUser().getUid();
+                    User newUser = new User();
+                    newUser.setId(userId);
+                    newUser.setEmail(email);
+                    newUser.setName(name);
+                    newUser.setPhone(phone);
+                    newUser.setRole("user"); // Default role
+                    newUser.setCreatedAt(System.currentTimeMillis());
+
+                    FirebaseUtils.createUserInFirestore(newUser);
                     resultLiveData.setValue(task.getResult());
                 } else {
                     resultLiveData.setValue(null);

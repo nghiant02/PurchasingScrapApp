@@ -14,6 +14,8 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -45,8 +47,13 @@ public class LoginActivity extends AppCompatActivity {
                 userViewModel.loginUser(this, email, password, progressBar).observe(this, authResult -> {
                     if (authResult != null) {
                         // Login success, handle navigation to next activity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                        if (user != null && user.isEmailVerified()) {
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
                     }

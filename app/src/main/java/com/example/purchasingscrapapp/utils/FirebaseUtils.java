@@ -8,11 +8,13 @@ import android.widget.Toast;
 
 import com.example.purchasingscrapapp.activity.LoginActivity;
 import com.example.purchasingscrapapp.activity.MainActivity;
+import com.example.purchasingscrapapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class FirebaseUtils {
 
@@ -55,13 +57,11 @@ public class FirebaseUtils {
         }
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(listener)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
-                            // Successful login, redirect to main activity
                             context.startActivity(new Intent(context, MainActivity.class));
                         } else {
                             Toast.makeText(context, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
@@ -87,11 +87,21 @@ public class FirebaseUtils {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(context, "Password reset email sent.", Toast.LENGTH_SHORT).show();
-                        // Redirect to login screen
                         context.startActivity(new Intent(context, LoginActivity.class));
                     } else {
                         Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
+                });
+    }
+
+    public static void createUserInFirestore(User user) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getId()).set(user)
+                .addOnSuccessListener(aVoid -> {
+                    // User added successfully
+                })
+                .addOnFailureListener(e -> {
+                    // Handle failure
                 });
     }
 

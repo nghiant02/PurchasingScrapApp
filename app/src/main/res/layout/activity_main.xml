@@ -12,21 +12,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/buttonSearchScrap"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tìm Kiếm Phế Liệu"
-        android:layout_below="@id/buttonViewScrapList"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"/>
+<!--    <Button-->
+<!--        android:id="@+id/buttonSearchScrap"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Tìm Kiếm Phế Liệu"-->
+<!--        android:layout_below="@id/buttonViewScrapList"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="16dp"/>-->
 
     <Button
         android:id="@+id/buttonPostScrap"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Đăng Phế Liệu"
-        android:layout_below="@id/buttonSearchScrap"
+        android:layout_below="@id/buttonViewScrapList"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"/>
 
