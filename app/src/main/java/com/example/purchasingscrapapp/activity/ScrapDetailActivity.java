@@ -18,8 +18,6 @@ import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -92,12 +90,6 @@ public class ScrapDetailActivity extends AppCompatActivity {
     }
 
     private void updateScrapDetails() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null || !currentUser.getUid().equals(scrap.getUserId())) {
-            Toast.makeText(this, "You do not have permission to update this scrap", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         String name = editTextName.getText().toString();
         String description = editTextDescription.getText().toString();
         String location = editTextLocation.getText().toString();
@@ -108,7 +100,7 @@ public class ScrapDetailActivity extends AppCompatActivity {
         scrap.setDescription(description);
         scrap.setLocation(location);
         scrap.setCategoryId(categoryId);
-        scrap.setUpdatedAt(System.currentTimeMillis());
+        scrap.setUpdatedAt(System.currentTimeMillis()); // Set updatedAt
 
         // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
@@ -125,12 +117,6 @@ public class ScrapDetailActivity extends AppCompatActivity {
     }
 
     private void deleteScrap() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser == null || !currentUser.getUid().equals(scrap.getUserId())) {
-            Toast.makeText(this, "You do not have permission to delete this scrap", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
         // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
 
