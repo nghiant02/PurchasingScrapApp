@@ -2,15 +2,11 @@ package com.example.purchasingscrapapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.purchasingscrapapp.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +21,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
         });
-
-        findViewById(R.id.buttonStaffScrapList).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StaffScrapListActivity.class)));
     }
 }

@@ -13,11 +13,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
@@ -125,12 +123,6 @@ public class PostScrapActivity extends AppCompatActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            imageViewScrap.setImageBitmap(imageBitmap);
-            // Convert the Bitmap to Uri and upload it
-            imageUri = getImageUriFromBitmap(imageBitmap);
         }
     }
 
@@ -149,17 +141,15 @@ public class PostScrapActivity extends AppCompatActivity {
     }
 
     private void postScrap(String name, String description, String location, String categoryId, String imageUrl) {
+        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         Scrap scrap = new Scrap();
         scrap.setName(name);
         scrap.setDescription(description);
         scrap.setLocation(location);
         scrap.setCategoryId(categoryId);
         scrap.setImageUrl(imageUrl);
-        scrap.setCreatedAt(System.currentTimeMillis()); // Set createdAt
-
-        // Set userId from current user
-        String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         scrap.setUserId(userId);
+        scrap.setCreatedAt(System.currentTimeMillis()); // Set createdAt
 
         scrapViewModel.postScrap(scrap).observe(this, success -> {
             progressBar.setVisibility(View.GONE);
@@ -179,10 +169,5 @@ public class PostScrapActivity extends AppCompatActivity {
             }
         }
         return null;
-    }
-
-    private Uri getImageUriFromBitmap(Bitmap bitmap) {
-        String path = MediaStore.Images.Media.insertImage(getContentResolver(), bitmap, "ScrapImage", null);
-        return Uri.parse(path);
     }
 }
