@@ -2,6 +2,7 @@ package com.example.purchasingscrapapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,10 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.purchasingscrapapp.R;
-import com.example.purchasingscrapapp.utils.ValidationUtils;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.example.purchasingscrapapp.utils.ValidationUtils;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -44,16 +43,14 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString().trim();
                 String password = passwordEditText.getText().toString().trim();
 
+                progressBar.setVisibility(View.VISIBLE);
                 userViewModel.loginUser(this, email, password, progressBar).observe(this, authResult -> {
-                    if (authResult != null) {
-                        // Login success, handle navigation to next activity
-                        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                        if (user != null && user.isEmailVerified()) {
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
-                        } else {
-                            Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_SHORT).show();
-                        }
+                    progressBar.setVisibility(View.GONE);
+                    if (authResult != null && authResult.getUser().isEmailVerified()) {
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    } else if (authResult != null) {
+                        Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
                     }

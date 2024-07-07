@@ -2,6 +2,7 @@ package com.example.purchasingscrapapp.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -12,8 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.purchasingscrapapp.R;
-import com.example.purchasingscrapapp.utils.ValidationUtils;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
+import com.example.purchasingscrapapp.utils.ValidationUtils;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -46,11 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String name = nameEditText.getText().toString().trim();
                 String phone = phoneEditText.getText().toString().trim();
 
+                progressBar.setVisibility(View.VISIBLE);
                 userViewModel.registerUser(this, email, password, name, phone, progressBar).observe(this, authResult -> {
+                    progressBar.setVisibility(View.GONE);
                     if (authResult != null) {
                         Toast.makeText(RegisterActivity.this, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
+                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
                         Toast.makeText(RegisterActivity.this, "Registration failed.", Toast.LENGTH_SHORT).show();
                     }
