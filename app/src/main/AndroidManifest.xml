@@ -27,7 +27,8 @@
         <activity android:name=".activity.SearchScrapActivity" />
         <activity android:name=".activity.PostScrapActivity" />
         <activity android:name=".activity.ScrapDetailActivity" />
-
+        <activity android:name=".activity.ChatActivity" />
+        <activity android:name=".activity.RateOrdersActivity" />
     </application>
 
 </manifest>
