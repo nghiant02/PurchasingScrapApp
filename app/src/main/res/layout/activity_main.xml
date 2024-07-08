@@ -25,11 +25,4 @@
         android:layout_below="@id/buttonPostScrap"
         android:layout_marginTop="16dp" />
 
-    <Button
-        android:id="@+id/buttonStaffScrapList"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View All Scraps"
-        android:layout_below="@id/buttonSignOut"
-        android:layout_marginTop="16dp" />
 </RelativeLayout>
