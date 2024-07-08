@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.repository.ScrapRepository;
-
 import java.util.List;
 
 public class ScrapViewModel extends ViewModel {

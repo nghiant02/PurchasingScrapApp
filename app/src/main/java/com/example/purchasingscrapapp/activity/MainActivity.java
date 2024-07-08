@@ -23,6 +23,5 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
-        findViewById(R.id.buttonStaffScrapList).setOnClickListener(v -> startActivity(new Intent(MainActivity.this, StaffScrapListActivity.class)));
     }
 }

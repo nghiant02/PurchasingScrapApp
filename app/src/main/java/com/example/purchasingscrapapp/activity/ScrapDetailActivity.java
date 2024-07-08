@@ -9,16 +9,13 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.bumptech.glide.Glide;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -102,13 +99,13 @@ public class ScrapDetailActivity extends AppCompatActivity {
         scrap.setCategoryId(categoryId);
         scrap.setUpdatedAt(System.currentTimeMillis()); // Set updatedAt
 
-        // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
 
         scrapViewModel.updateScrap(scrap).observe(this, success -> {
             progressBar.setVisibility(View.GONE);
             if (success) {
                 Toast.makeText(ScrapDetailActivity.this, "Scrap updated successfully", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             } else {
                 Toast.makeText(ScrapDetailActivity.this, "Failed to update scrap", Toast.LENGTH_SHORT).show();
@@ -117,13 +114,13 @@ public class ScrapDetailActivity extends AppCompatActivity {
     }
 
     private void deleteScrap() {
-        // Show ProgressBar
         progressBar.setVisibility(View.VISIBLE);
 
         scrapViewModel.deleteScrap(scrap.getId()).observe(this, success -> {
             progressBar.setVisibility(View.GONE);
             if (success) {
                 Toast.makeText(ScrapDetailActivity.this, "Scrap deleted successfully", Toast.LENGTH_SHORT).show();
+                setResult(RESULT_OK);
                 finish();
             } else {
                 Toast.makeText(ScrapDetailActivity.this, "Failed to delete scrap", Toast.LENGTH_SHORT).show();

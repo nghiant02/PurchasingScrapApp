@@ -83,7 +83,6 @@ public class PostScrapActivity extends AppCompatActivity {
                 return;
             }
 
-            // Show ProgressBar
             progressBar.setVisibility(View.VISIBLE);
 
             if (imageUri != null) {
@@ -142,14 +141,8 @@ public class PostScrapActivity extends AppCompatActivity {
 
     private void postScrap(String name, String description, String location, String categoryId, String imageUrl) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Scrap scrap = new Scrap();
-        scrap.setName(name);
-        scrap.setDescription(description);
-        scrap.setLocation(location);
-        scrap.setCategoryId(categoryId);
-        scrap.setImageUrl(imageUrl);
-        scrap.setUserId(userId);
-        scrap.setCreatedAt(System.currentTimeMillis()); // Set createdAt
+        String scrapId = UUID.randomUUID().toString(); // Generate unique ID
+        Scrap scrap = new Scrap(scrapId, userId, categoryId, name, description, imageUrl, location, System.currentTimeMillis(), System.currentTimeMillis());
 
         scrapViewModel.postScrap(scrap).observe(this, success -> {
             progressBar.setVisibility(View.GONE);

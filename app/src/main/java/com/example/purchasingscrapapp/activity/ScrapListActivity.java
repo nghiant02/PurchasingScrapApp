@@ -7,18 +7,15 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.adapter.ScrapAdapter;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
 import com.google.firebase.auth.FirebaseAuth;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,32 +34,17 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scrap_list);
 
-        editTextSearch = findViewById(R.id.edit_text_search);
-        recyclerViewScrapList = findViewById(R.id.recycler_view_scrap_list);
-        progressBar = findViewById(R.id.progress_bar);
-
-        recyclerViewScrapList.setLayoutManager(new LinearLayoutManager(this));
-        recyclerViewScrapList.setHasFixedSize(true);
+        initViews();
 
         scrapAdapter = new ScrapAdapter(this);
+        recyclerViewScrapList.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewScrapList.setHasFixedSize(true);
         recyclerViewScrapList.setAdapter(scrapAdapter);
 
         scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
-
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        // Show ProgressBar
-        progressBar.setVisibility(View.VISIBLE);
-        recyclerViewScrapList.setVisibility(View.GONE);
-
-        scrapViewModel.getScrapsByUser(currentUserId).observe(this, scraps -> {
-            scrapList = scraps;
-            scrapAdapter.setScraps(scraps);
-
-            // Hide ProgressBar and show RecyclerView
-            progressBar.setVisibility(View.GONE);
-            recyclerViewScrapList.setVisibility(View.VISIBLE);
-        });
+        loadScrapPosts();
 
         editTextSearch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,6 +57,24 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
 
             @Override
             public void afterTextChanged(Editable s) {}
+        });
+    }
+
+    private void initViews() {
+        editTextSearch = findViewById(R.id.edit_text_search);
+        recyclerViewScrapList = findViewById(R.id.recycler_view_scrap_list);
+        progressBar = findViewById(R.id.progress_bar);
+    }
+
+    private void loadScrapPosts() {
+        progressBar.setVisibility(View.VISIBLE);
+        recyclerViewScrapList.setVisibility(View.GONE);
+
+        scrapViewModel.getScrapsByUser(currentUserId).observe(this, scraps -> {
+            scrapList = scraps;
+            scrapAdapter.setScraps(scraps);
+            progressBar.setVisibility(View.GONE);
+            recyclerViewScrapList.setVisibility(View.VISIBLE);
         });
     }
 
@@ -92,6 +92,14 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
     public void onScrapClick(Scrap scrap) {
         Intent intent = new Intent(ScrapListActivity.this, ScrapDetailActivity.class);
         intent.putExtra("scrap", scrap);  // Pass as Serializable
-        startActivity(intent);
+        startActivityForResult(intent, 1);  // Start for result
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            loadScrapPosts();  // Reload scrap posts when returning from detail activity
+        }
     }
 }
