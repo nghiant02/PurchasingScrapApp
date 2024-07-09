@@ -15,6 +15,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -23,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView registerButton, forgotPasswordButton;
     private ProgressBar progressBar;
     private UserViewModel userViewModel;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        db = FirebaseFirestore.getInstance();
 
         loginButton.setOnClickListener(v -> {
             if (ValidationUtils.isValidEmail(emailEditText) && ValidationUtils.isValidPassword(passwordEditText)) {
@@ -47,8 +53,20 @@ public class LoginActivity extends AppCompatActivity {
                 userViewModel.loginUser(this, email, password, progressBar).observe(this, authResult -> {
                     progressBar.setVisibility(View.GONE);
                     if (authResult != null && authResult.getUser().isEmailVerified()) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        FirebaseUser user = authResult.getUser();
+                        db.collection("users").document(user.getUid()).get().addOnCompleteListener(task -> {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    String status = document.getString("status");
+                                    if ("active".equals(status)) {
+                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Your account is not active.", Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            }
+                        });
                     } else if (authResult != null) {
                         Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                     } else {

@@ -22,17 +22,6 @@ public class UserRepository {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    // After successful registration, create additional fields in Firestore
-                    String userId = task.getResult().getUser().getUid();
-                    User newUser = new User();
-                    newUser.setId(userId);
-                    newUser.setEmail(email);
-                    newUser.setName(name);
-                    newUser.setPhone(phone);
-                    newUser.setRole("user"); // Default role
-                    newUser.setCreatedAt(System.currentTimeMillis());
-
-                    FirebaseUtils.createUserInFirestore(newUser);
                     resultLiveData.setValue(task.getResult());
                 } else {
                     resultLiveData.setValue(null);
@@ -70,5 +59,9 @@ public class UserRepository {
             }
         });
         return resultLiveData;
+    }
+
+    public void createUserInFirestore(User user) {
+        FirebaseUtils.createUserInFirestore(user);
     }
 }

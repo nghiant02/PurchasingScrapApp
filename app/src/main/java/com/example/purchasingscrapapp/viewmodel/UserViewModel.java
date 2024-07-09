@@ -6,6 +6,7 @@ import android.widget.ProgressBar;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.purchasingscrapapp.model.User;
 import com.example.purchasingscrapapp.repository.UserRepository;
 import com.google.firebase.auth.AuthResult;
 
@@ -26,5 +27,9 @@ public class UserViewModel extends ViewModel {
 
     public LiveData<Void> resetPassword(Context context, String email, ProgressBar progressBar) {
         return userRepository.resetPassword(context, email, progressBar);
+    }
+
+    public void createUserInFirestore(User user) {
+        userRepository.createUserInFirestore(user);
     }
 }

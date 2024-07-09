@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
+import com.example.purchasingscrapapp.model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -51,6 +52,10 @@ public class RegisterActivity extends AppCompatActivity {
                 userViewModel.registerUser(this, email, password, name, phone, progressBar).observe(this, authResult -> {
                     progressBar.setVisibility(View.GONE);
                     if (authResult != null) {
+                        String userId = authResult.getUser().getUid();
+                        User newUser = new User(userId, email, password, name, phone, "", "", "user", "active", System.currentTimeMillis(), System.currentTimeMillis());
+                        userViewModel.createUserInFirestore(newUser);
+
                         Toast.makeText(RegisterActivity.this, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     } else {
