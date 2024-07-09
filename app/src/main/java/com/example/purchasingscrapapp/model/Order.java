@@ -10,12 +10,12 @@ public class Order implements Serializable {
     private int quantity;
     private double totalPrice;
     private String status;
-    private long timestamp;
+    private long createdAt;
+    private long updatedAt;
 
-    public Order() {
-    }
+    public Order() {}
 
-    public Order(String id, String buyerId, String sellerId, String scrapId, int quantity, double totalPrice, String status, long timestamp) {
+    public Order(String id, String buyerId, String sellerId, String scrapId, int quantity, double totalPrice, String status, long createdAt, long updatedAt) {
         this.id = id;
         this.buyerId = buyerId;
         this.sellerId = sellerId;
@@ -23,7 +23,8 @@ public class Order implements Serializable {
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.status = status;
-        this.timestamp = timestamp;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public String getId() {
@@ -82,11 +83,19 @@ public class Order implements Serializable {
         this.status = status;
     }
 
-    public long getTimestamp() {
-        return timestamp;
+    public long getCreatedAt() {
+        return createdAt;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public void setCreatedAt(long createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }

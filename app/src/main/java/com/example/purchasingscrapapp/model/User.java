@@ -11,13 +11,13 @@ public class User implements Serializable {
     private String address;
     private String profileImage;
     private String role;
+    private String status;
     private long createdAt;
     private long updatedAt;
 
-    public User() {
-    }
+    public User() {}
 
-    public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, long createdAt, long updatedAt) {
+    public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, String status, long createdAt, long updatedAt) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -26,6 +26,7 @@ public class User implements Serializable {
         this.address = address;
         this.profileImage = profileImage;
         this.role = role;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -92,6 +93,14 @@ public class User implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getCreatedAt() {

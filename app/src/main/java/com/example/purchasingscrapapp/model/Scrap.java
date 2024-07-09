@@ -10,13 +10,13 @@ public class Scrap implements Serializable {
     private String description;
     private String imageUrl;
     private String location;
+    private String status;
     private long createdAt;
     private long updatedAt;
 
-    public Scrap() {
-    }
+    public Scrap() {}
 
-    public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, String location, long createdAt, long updatedAt) {
+    public Scrap(String id, String userId, String categoryId, String name, String description, String imageUrl, String location, String status, long createdAt, long updatedAt) {
         this.id = id;
         this.userId = userId;
         this.categoryId = categoryId;
@@ -24,6 +24,7 @@ public class Scrap implements Serializable {
         this.description = description;
         this.imageUrl = imageUrl;
         this.location = location;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -82,6 +83,14 @@ public class Scrap implements Serializable {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getCreatedAt() {

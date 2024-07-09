@@ -7,16 +7,17 @@ public class Message implements Serializable {
     private String fromUserId;
     private String toUserId;
     private String content;
+    private String status;
     private long timestamp;
 
-    public Message() {
-    }
+    public Message() {}
 
-    public Message(String id, String fromUserId, String toUserId, String content, long timestamp) {
+    public Message(String id, String fromUserId, String toUserId, String content, String status, long timestamp) {
         this.id = id;
         this.fromUserId = fromUserId;
         this.toUserId = toUserId;
         this.content = content;
+        this.status = status;
         this.timestamp = timestamp;
     }
 
@@ -50,6 +51,14 @@ public class Message implements Serializable {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getTimestamp() {

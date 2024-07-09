@@ -5,17 +5,16 @@ import java.io.Serializable;
 public class ScrapCategory implements Serializable {
     private String id;
     private String name;
-    private String description;
+    private String status;
     private long createdAt;
     private long updatedAt;
 
-    public ScrapCategory() {
-    }
+    public ScrapCategory() {}
 
-    public ScrapCategory(String id, String name, String description, long createdAt, long updatedAt) {
+    public ScrapCategory(String id, String name, String status, long createdAt, long updatedAt) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -36,12 +35,12 @@ public class ScrapCategory implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getStatus() {
+        return status;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public long getCreatedAt() {

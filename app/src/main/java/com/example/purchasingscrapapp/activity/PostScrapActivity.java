@@ -141,8 +141,8 @@ public class PostScrapActivity extends AppCompatActivity {
 
     private void postScrap(String name, String description, String location, String categoryId, String imageUrl) {
         String userId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String scrapId = UUID.randomUUID().toString(); // Generate unique ID
-        Scrap scrap = new Scrap(scrapId, userId, categoryId, name, description, imageUrl, location, System.currentTimeMillis(), System.currentTimeMillis());
+        String scrapId = UUID.randomUUID().toString();
+        Scrap scrap = new Scrap(scrapId, userId, categoryId, name, description, imageUrl, location, "active", System.currentTimeMillis(), System.currentTimeMillis());
 
         scrapViewModel.postScrap(scrap).observe(this, success -> {
             progressBar.setVisibility(View.GONE);
