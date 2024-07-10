@@ -15,39 +15,4 @@ import org.checkerframework.checker.nullness.qual.NonNull;
 
 public class FirebaseService {
 
-//    public LiveData<AuthResult> registerUser(Context context, String email, String password, String name, String phone, ProgressBar progressBar) {
-//        MutableLiveData<AuthResult> result = new MutableLiveData<>();
-//        FirebaseUtils.registerUser(context, email, password, name, phone, progressBar, task -> {
-//            if (task.isSuccessful()) {
-//                result.setValue(task.getResult());
-//            } else {
-//                result.setValue(null);
-//            }
-//        });
-//        return result;
-//    }
-//
-//    public LiveData<AuthResult> loginUser(Context context, String email, String password, ProgressBar progressBar) {
-//        MutableLiveData<AuthResult> result = new MutableLiveData<>();
-//        FirebaseUtils.loginUser(context, email, password, progressBar, task -> {
-//            if (task.isSuccessful()) {
-//                result.setValue(task.getResult());
-//            } else {
-//                result.setValue(null);
-//            }
-//        });
-//        return result;
-//    }
-//
-//    public LiveData<Void> resetPassword(Context context, String email, ProgressBar progressBar) {
-//        MutableLiveData<Void> result = new MutableLiveData<>();
-//        FirebaseUtils.resetPassword(context, email, progressBar, task -> {
-//            if (task.isSuccessful()) {
-//                result.setValue(task.getResult());
-//            } else {
-//                result.setValue(null);
-//            }
-//        });
-//        return result;
-//    }
 }

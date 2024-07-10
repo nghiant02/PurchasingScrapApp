@@ -10,6 +10,8 @@ import com.example.purchasingscrapapp.model.User;
 import com.example.purchasingscrapapp.repository.UserRepository;
 import com.google.firebase.auth.AuthResult;
 
+import java.util.List;
+
 public class UserViewModel extends ViewModel {
     private UserRepository userRepository;
 
@@ -31,5 +33,9 @@ public class UserViewModel extends ViewModel {
 
     public void createUserInFirestore(User user) {
         userRepository.createUserInFirestore(user);
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        return userRepository.getAllUsers();
     }
 }

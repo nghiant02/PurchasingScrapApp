@@ -1,13 +1,10 @@
 package com.example.purchasingscrapapp.utils;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.purchasingscrapapp.activity.LoginActivity;
-import com.example.purchasingscrapapp.activity.MainActivity;
 import com.example.purchasingscrapapp.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.firebase.auth.AuthResult;
@@ -39,8 +36,9 @@ public class FirebaseUtils {
                             firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(updateTask -> {
                                 if (updateTask.isSuccessful()) {
                                     sendVerificationEmail(context);
+                                    User user = new User(firebaseUser.getUid(), email, password, name, phone, "", "", "user", "active", System.currentTimeMillis(), System.currentTimeMillis());
+                                    createUserInFirestore(user);
                                     Toast.makeText(context, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
-                                    context.startActivity(new Intent(context, LoginActivity.class));
                                 }
                             });
                         }
@@ -57,18 +55,11 @@ public class FirebaseUtils {
         }
         progressBar.setVisibility(View.VISIBLE);
         mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(listener)
                 .addOnCompleteListener(task -> {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null && user.isEmailVerified()) {
-                            context.startActivity(new Intent(context, MainActivity.class));
-                        } else {
-                            Toast.makeText(context, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
-                            if (user != null) {
-                                sendVerificationEmail(context);
-                            }
-                        }
+                        // The role-based redirection and verification checks are handled in LoginActivity
                     } else {
                         Toast.makeText(context, "Login failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }
@@ -87,7 +78,6 @@ public class FirebaseUtils {
                     progressBar.setVisibility(View.GONE);
                     if (task.isSuccessful()) {
                         Toast.makeText(context, "Password reset email sent.", Toast.LENGTH_SHORT).show();
-                        context.startActivity(new Intent(context, LoginActivity.class));
                     } else {
                         Toast.makeText(context, "Error: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                     }

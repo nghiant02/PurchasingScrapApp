@@ -11,7 +11,7 @@ public class ValidationUtils {
 
     public static boolean isValidPassword(EditText passwordEditText) {
         String password = passwordEditText.getText().toString().trim();
-        return password.length() >= 6 && password.matches(".*\\d.*") && password.matches(".*[A-Z].*") && password.matches(".*[!@#$%^&*+=?-].*");
+        return password.length() >= 6;
     }
 
     public static boolean isNotEmpty(EditText editText) {

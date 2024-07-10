@@ -52,23 +52,36 @@ public class LoginActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.VISIBLE);
                 userViewModel.loginUser(this, email, password, progressBar).observe(this, authResult -> {
                     progressBar.setVisibility(View.GONE);
-                    if (authResult != null && authResult.getUser().isEmailVerified()) {
+                    if (authResult != null) {
                         FirebaseUser user = authResult.getUser();
                         db.collection("users").document(user.getUid()).get().addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
                                 DocumentSnapshot document = task.getResult();
                                 if (document.exists()) {
                                     String status = document.getString("status");
+                                    String role = document.getString("role");
                                     if ("active".equals(status)) {
-                                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                        if ("admin".equals(role) || "staff".equals(role)) {
+                                            Intent intent = getIntentForRole(role);
+                                            startActivity(intent);
+                                            finish();
+                                        } else if (user.isEmailVerified()) {
+                                            Intent intent = getIntentForRole(role);
+                                            startActivity(intent);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
+                                        }
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Your account is not active.", Toast.LENGTH_LONG).show();
                                     }
+                                } else {
+                                    Toast.makeText(LoginActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
                                 }
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
                             }
                         });
-                    } else if (authResult != null) {
-                        Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                     } else {
                         Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
                     }
@@ -80,5 +93,16 @@ public class LoginActivity extends AppCompatActivity {
 
         registerButton.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
         forgotPasswordButton.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class)));
+    }
+
+    private Intent getIntentForRole(String role) {
+        switch (role) {
+            case "admin":
+                return new Intent(LoginActivity.this, AdminDashboardActivity.class);
+            case "staff":
+                return new Intent(LoginActivity.this, StaffDashboardActivity.class);
+            default:
+                return new Intent(LoginActivity.this, MainActivity.class);
+        }
     }
 }

@@ -11,8 +11,13 @@ import com.example.purchasingscrapapp.utils.FirebaseUtils;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import org.checkerframework.checker.nullness.qual.NonNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserRepository {
 
@@ -63,5 +68,24 @@ public class UserRepository {
 
     public void createUserInFirestore(User user) {
         FirebaseUtils.createUserInFirestore(user);
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        MutableLiveData<List<User>> usersLiveData = new MutableLiveData<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<User> userList = new ArrayList<>();
+                for (QueryDocumentSnapshot document : task.getResult()) {
+                    User user = document.toObject(User.class);
+                    user.setId(document.getId());
+                    userList.add(user);
+                }
+                usersLiveData.setValue(userList);
+            } else {
+                usersLiveData.setValue(null);
+            }
+        });
+        return usersLiveData;
     }
 }

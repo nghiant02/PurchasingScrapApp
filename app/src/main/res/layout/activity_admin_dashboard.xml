@@ -4,33 +4,37 @@
     android:padding="16dp">
 
     <Button
-        android:id="@+id/button_manage_users"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonManageUsers"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manage Users"
-        android:layout_marginBottom="16dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp" />
 
     <Button
-        android:id="@+id/button_manage_scrap_posts"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonManageScrapPosts"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Manage Scrap Posts"
-        android:layout_below="@id/button_manage_users"
-        android:layout_marginBottom="16dp" />
+        android:layout_below="@id/buttonManageUsers"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
     <Button
-        android:id="@+id/button_assign_tasks"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonAssignTasks"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Assign Tasks"
-        android:layout_below="@id/button_manage_scrap_posts"
-        android:layout_marginBottom="16dp" />
+        android:layout_below="@id/buttonManageScrapPosts"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
     <Button
-        android:id="@+id/button_view_reports"
-        android:layout_width="match_parent"
+        android:id="@+id/buttonViewReports"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="View Reports"
-        android:layout_below="@id/button_assign_tasks"
-        android:layout_marginBottom="16dp" />
+        android:layout_below="@id/buttonAssignTasks"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>
