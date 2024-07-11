@@ -7,15 +7,18 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.adapter.ScrapAdapter;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
 import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,15 +94,24 @@ public class ScrapListActivity extends AppCompatActivity implements ScrapAdapter
     @Override
     public void onScrapClick(Scrap scrap) {
         Intent intent = new Intent(ScrapListActivity.this, ScrapDetailActivity.class);
-        intent.putExtra("scrap", scrap);  // Pass as Serializable
-        startActivityForResult(intent, 1);  // Start for result
+        intent.putExtra("id", scrap.getId());
+        intent.putExtra("userId", scrap.getUserId());
+        intent.putExtra("categoryId", scrap.getCategoryId());
+        intent.putExtra("name", scrap.getName());
+        intent.putExtra("description", scrap.getDescription());
+        intent.putExtra("imageUrl", scrap.getImageUrl());
+        intent.putExtra("location", scrap.getLocation());
+        intent.putExtra("status", scrap.getStatus());
+        intent.putExtra("createdAt", scrap.getCreatedAt().toDate().getTime());
+        intent.putExtra("updatedAt", scrap.getUpdatedAt().toDate().getTime());
+        startActivityForResult(intent, 1);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            loadScrapPosts();  // Reload scrap posts when returning from detail activity
+            loadScrapPosts();
         }
     }
 }

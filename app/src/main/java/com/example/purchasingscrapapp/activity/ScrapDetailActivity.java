@@ -1,5 +1,6 @@
 package com.example.purchasingscrapapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -45,7 +46,20 @@ public class ScrapDetailActivity extends AppCompatActivity {
 
         scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
 
-        scrap = (Scrap) getIntent().getSerializableExtra("scrap");
+        // Deserialize the Scrap object
+        Intent intent = getIntent();
+        scrap = new Scrap(
+                intent.getStringExtra("id"),
+                intent.getStringExtra("userId"),
+                intent.getStringExtra("categoryId"),
+                intent.getStringExtra("name"),
+                intent.getStringExtra("description"),
+                intent.getStringExtra("imageUrl"),
+                intent.getStringExtra("location"),
+                intent.getStringExtra("status"),
+                new Timestamp(new Date(intent.getLongExtra("createdAt", 0))),
+                new Timestamp(new Date(intent.getLongExtra("updatedAt", 0)))
+        );
         if (scrap != null) {
             populateScrapDetails();
         }
@@ -102,7 +116,7 @@ public class ScrapDetailActivity extends AppCompatActivity {
         scrap.setDescription(description);
         scrap.setLocation(location);
         scrap.setCategoryId(categoryId);
-        scrap.setUpdatedAt(new Timestamp(new Date())); // Set updatedAt
+        scrap.setUpdatedAt(new Timestamp(new Date()));
 
         progressBar.setVisibility(View.VISIBLE);
 
