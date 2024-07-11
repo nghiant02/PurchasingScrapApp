@@ -23,7 +23,8 @@
         android:id="@+id/text_view_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Role" />
+        android:text="Role"
+        android:visibility="gone"/>
 
     <TextView
         android:id="@+id/text_view_status"

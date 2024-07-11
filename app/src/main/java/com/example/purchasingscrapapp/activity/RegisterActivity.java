@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     if (authResult != null) {
                         String userId = authResult.getUser().getUid();
-                        User newUser = new User(userId, email, password, name, phone, "", "", "user", "active", Timestamp.now(), Timestamp.now());
+                        User newUser = new User(userId, email, password, name, phone, "", "", "user", "inactive", Timestamp.now(), Timestamp.now());
                         userViewModel.createUserInFirestore(newUser);
 
                         Toast.makeText(RegisterActivity.this, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();

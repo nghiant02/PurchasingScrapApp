@@ -41,7 +41,7 @@ public class FirebaseUtils {
                             firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(updateTask -> {
                                 if (updateTask.isSuccessful()) {
                                     sendVerificationEmail(context);
-                                    User user = new User(firebaseUser.getUid(), email, password, name, phone, "", "", "user", "active", new Timestamp(new Date()), new Timestamp(new Date()));
+                                    User user = new User(firebaseUser.getUid(), email, password, name, phone, "", "", "user", "inactive", new Timestamp(new Date()), new Timestamp(new Date()));
                                     createUserInFirestore(user);
                                     Toast.makeText(context, "Registration successful. Please check your email for verification.", Toast.LENGTH_LONG).show();
                                     context.startActivity(new Intent(context, LoginActivity.class));

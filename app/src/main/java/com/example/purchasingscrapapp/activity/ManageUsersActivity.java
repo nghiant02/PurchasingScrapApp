@@ -13,6 +13,9 @@ import com.example.purchasingscrapapp.adapter.UserAdapter;
 import com.example.purchasingscrapapp.model.User;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class ManageUsersActivity extends AppCompatActivity {
 
     private UserViewModel userViewModel;
@@ -31,7 +34,8 @@ public class ManageUsersActivity extends AppCompatActivity {
 
         userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         userViewModel.getAllUsers().observe(this, users -> {
-            adapter.setUsers(users);
+            List<User> userOnlyList = users.stream().filter(user -> "user".equals(user.getRole())).collect(Collectors.toList());
+            adapter.setUsers(userOnlyList);
         });
 
         adapter.setOnItemClickListener(new UserAdapter.OnItemClickListener() {
@@ -41,6 +45,7 @@ public class ManageUsersActivity extends AppCompatActivity {
                 user.setStatus(newStatus);
                 userViewModel.updateUserStatus(user);
                 Toast.makeText(ManageUsersActivity.this, "User status updated to " + newStatus, Toast.LENGTH_SHORT).show();
+                adapter.notifyItemChanged(adapter.getUsers().indexOf(user)); // Update the button text
             }
 
             @Override

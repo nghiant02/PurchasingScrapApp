@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
-
     private List<User> users = new ArrayList<>();
     private OnItemClickListener listener;
 
@@ -33,7 +32,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
         User currentUser = users.get(position);
         holder.textViewName.setText(currentUser.getName());
         holder.textViewEmail.setText(currentUser.getEmail());
-        holder.textViewRole.setText(currentUser.getRole());
         holder.textViewStatus.setText(currentUser.getStatus());
         holder.buttonBlockUnblock.setText(currentUser.getStatus().equals("active") ? "Block" : "Unblock");
     }
@@ -41,6 +39,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     @Override
     public int getItemCount() {
         return users.size();
+    }
+
+    public List<User> getUsers() {
+        return users;
     }
 
     public void setUsers(List<User> users) {
@@ -51,28 +53,26 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
     class UserHolder extends RecyclerView.ViewHolder {
         private TextView textViewName;
         private TextView textViewEmail;
-        private TextView textViewRole;
         private TextView textViewStatus;
         private Button buttonBlockUnblock;
 
-        public UserHolder(@NonNull View itemView) {
+        public UserHolder(View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewEmail = itemView.findViewById(R.id.text_view_email);
-            textViewRole = itemView.findViewById(R.id.text_view_role);
             textViewStatus = itemView.findViewById(R.id.text_view_status);
             buttonBlockUnblock = itemView.findViewById(R.id.button_block_unblock);
 
             buttonBlockUnblock.setOnClickListener(v -> {
                 int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && listener != null) {
+                if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onBlockUnblockClick(users.get(position));
                 }
             });
 
             itemView.setOnClickListener(v -> {
                 int position = getAdapterPosition();
-                if (position != RecyclerView.NO_POSITION && listener != null) {
+                if (listener != null && position != RecyclerView.NO_POSITION) {
                     listener.onItemClick(users.get(position));
                 }
             });
@@ -81,6 +81,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserHolder> {
 
     public interface OnItemClickListener {
         void onBlockUnblockClick(User user);
+
         void onItemClick(User user);
     }
 
