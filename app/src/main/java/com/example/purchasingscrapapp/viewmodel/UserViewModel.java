@@ -38,4 +38,8 @@ public class UserViewModel extends ViewModel {
     public LiveData<List<User>> getAllUsers() {
         return userRepository.getAllUsers();
     }
+
+    public void updateUserStatus(User user) {
+        userRepository.updateUserStatus(user);
+    }
 }

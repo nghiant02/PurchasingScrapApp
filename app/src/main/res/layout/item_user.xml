@@ -10,27 +10,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Name"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textSize="18sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/text_view_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="Email" />
 
     <TextView
         android:id="@+id/text_view_role"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Role"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="Role" />
 
     <TextView
         android:id="@+id/text_view_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Status"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:text="Status" />
+
+    <Button
+        android:id="@+id/button_block_unblock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Block/Unblock" />
+
 </LinearLayout>

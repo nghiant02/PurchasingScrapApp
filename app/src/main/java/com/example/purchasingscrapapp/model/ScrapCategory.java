@@ -1,17 +1,19 @@
 package com.example.purchasingscrapapp.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 public class ScrapCategory implements Serializable {
     private String id;
     private String name;
     private String status;
-    private long createdAt;
-    private long updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public ScrapCategory() {}
 
-    public ScrapCategory(String id, String name, String status, long createdAt, long updatedAt) {
+    public ScrapCategory(String id, String name, String status, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.name = name;
         this.status = status;
@@ -43,19 +45,19 @@ public class ScrapCategory implements Serializable {
         this.status = status;
     }
 
-    public long getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

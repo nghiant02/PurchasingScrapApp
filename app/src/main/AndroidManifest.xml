@@ -31,5 +31,9 @@
         <activity android:name=".activity.RateOrdersActivity" />
         <activity android:name=".activity.AdminDashboardActivity" />
         <activity android:name=".activity.StaffDashboardActivity" />
+        <activity android:name=".activity.ManageUsersActivity" />
+        <activity android:name=".activity.ManageScrapPostsActivity" />
+        <activity android:name=".activity.AssignTasksActivity" />
+        <activity android:name=".activity.ViewReportsActivity" />
     </application>
 </manifest>

@@ -1,5 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 public class Notification implements Serializable {
@@ -8,12 +10,12 @@ public class Notification implements Serializable {
     private String message;
     private boolean isRead;
     private String type;
-    private long createdAt;
-    private long updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Notification() {}
 
-    public Notification(String id, String userId, String message, boolean isRead, String type, long createdAt, long updatedAt) {
+    public Notification(String id, String userId, String message, boolean isRead, String type, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.userId = userId;
         this.message = message;
@@ -63,19 +65,19 @@ public class Notification implements Serializable {
         this.type = type;
     }
 
-    public long getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

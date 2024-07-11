@@ -4,11 +4,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,7 @@ public class ScrapRepository {
 
     public LiveData<Boolean> postScrap(Scrap scrap) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
-        scrap.setCreatedAt(System.currentTimeMillis());
+        scrap.setCreatedAt(Timestamp.now());
         scrapsRef.document(scrap.getId()).set(scrap).addOnCompleteListener(task -> successData.setValue(task.isSuccessful()));
         return successData;
     }
@@ -66,7 +65,7 @@ public class ScrapRepository {
 
     public LiveData<Boolean> updateScrap(Scrap scrap) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
-        scrap.setUpdatedAt(System.currentTimeMillis());
+        scrap.setUpdatedAt(Timestamp.now());
         scrapsRef.document(scrap.getId()).set(scrap).addOnCompleteListener(task -> successData.setValue(task.isSuccessful()));
         return successData;
     }

@@ -9,14 +9,19 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.bumptech.glide.Glide;
 import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
+import com.google.firebase.Timestamp;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ScrapDetailActivity extends AppCompatActivity {
@@ -97,7 +102,7 @@ public class ScrapDetailActivity extends AppCompatActivity {
         scrap.setDescription(description);
         scrap.setLocation(location);
         scrap.setCategoryId(categoryId);
-        scrap.setUpdatedAt(System.currentTimeMillis()); // Set updatedAt
+        scrap.setUpdatedAt(new Timestamp(new Date())); // Set updatedAt
 
         progressBar.setVisibility(View.VISIBLE);
 

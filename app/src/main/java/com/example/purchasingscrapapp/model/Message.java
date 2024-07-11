@@ -1,5 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 public class Message implements Serializable {
@@ -8,11 +10,11 @@ public class Message implements Serializable {
     private String toUserId;
     private String content;
     private String status;
-    private long timestamp;
+    private Timestamp timestamp;
 
     public Message() {}
 
-    public Message(String id, String fromUserId, String toUserId, String content, String status, long timestamp) {
+    public Message(String id, String fromUserId, String toUserId, String content, String status, Timestamp timestamp) {
         this.id = id;
         this.fromUserId = fromUserId;
         this.toUserId = toUserId;
@@ -61,11 +63,11 @@ public class Message implements Serializable {
         this.status = status;
     }
 
-    public long getTimestamp() {
+    public Timestamp getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 }

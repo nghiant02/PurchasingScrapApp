@@ -1,5 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -12,12 +14,12 @@ public class User implements Serializable {
     private String profileImage;
     private String role;
     private String status;
-    private long createdAt;
-    private long updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public User() {}
 
-    public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, String status, long createdAt, long updatedAt) {
+    public User(String id, String email, String password, String name, String phone, String address, String profileImage, String role, String status, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -103,19 +105,19 @@ public class User implements Serializable {
         this.status = status;
     }
 
-    public long getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }

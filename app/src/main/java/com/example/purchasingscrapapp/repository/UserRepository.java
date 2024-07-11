@@ -88,4 +88,16 @@ public class UserRepository {
         });
         return usersLiveData;
     }
+
+    public void updateUserStatus(User user) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(user.getId())
+                .update("status", user.getStatus())
+                .addOnSuccessListener(aVoid -> {
+                    // Successfully updated user status
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error
+                });
+    }
 }

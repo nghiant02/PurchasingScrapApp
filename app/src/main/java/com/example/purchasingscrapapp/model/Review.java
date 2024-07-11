@@ -1,5 +1,7 @@
 package com.example.purchasingscrapapp.model;
 
+import com.google.firebase.Timestamp;
+
 import java.io.Serializable;
 
 public class Review implements Serializable {
@@ -8,12 +10,12 @@ public class Review implements Serializable {
     private int rating;
     private String comment;
     private String status;
-    private long createdAt;
-    private long updatedAt;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Review() {}
 
-    public Review(String id, String orderId, int rating, String comment, String status, long createdAt, long updatedAt) {
+    public Review(String id, String orderId, int rating, String comment, String status, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
         this.orderId = orderId;
         this.rating = rating;
@@ -63,19 +65,19 @@ public class Review implements Serializable {
         this.status = status;
     }
 
-    public long getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(long createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public long getUpdatedAt() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(long updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 }
