@@ -23,6 +23,10 @@ public class UserViewModel extends ViewModel {
         return userRepository.registerUser(context, email, password, name, phone, progressBar);
     }
 
+    public LiveData<AuthResult> registerStaff(Context context, String email, String password, String name, String phone, ProgressBar progressBar) {
+        return userRepository.registerStaff(context, email, password, name, phone, progressBar);
+    }
+
     public LiveData<AuthResult> loginUser(Context context, String email, String password, ProgressBar progressBar) {
         return userRepository.loginUser(context, email, password, progressBar);
     }

@@ -13,6 +13,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         setContentView(R.layout.activity_admin_dashboard);
 
         findViewById(R.id.buttonManageUsers).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, ManageUsersActivity.class)));
+        findViewById(R.id.buttonCreateStaff).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, CreateStaffActivity.class)));
+        findViewById(R.id.buttonManageStaff).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, ManageStaffActivity.class)));
         findViewById(R.id.buttonManageScrapPosts).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, ManageScrapPostsActivity.class)));
         findViewById(R.id.buttonAssignTasks).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, AssignTasksActivity.class)));
         findViewById(R.id.buttonViewReports).setOnClickListener(v -> startActivity(new Intent(AdminDashboardActivity.this, ViewReportsActivity.class)));

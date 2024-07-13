@@ -54,6 +54,38 @@ public class FirebaseUtils {
                 });
     }
 
+    public static void registerStaff(Context context, String email, String password, String name, String phone, ProgressBar progressBar, OnCompleteListener<AuthResult> listener) {
+        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty()) {
+            Toast.makeText(context, "All fields are required", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        progressBar.setVisibility(View.VISIBLE);
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(listener)
+                .addOnCompleteListener(task -> {
+                    progressBar.setVisibility(View.GONE);
+                    if (task.isSuccessful()) {
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        if (firebaseUser != null) {
+                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                                    .setDisplayName(name)
+                                    .build();
+                            firebaseUser.updateProfile(profileUpdates).addOnCompleteListener(updateTask -> {
+                                if (updateTask.isSuccessful()) {
+                                    User user = new User(firebaseUser.getUid(), email, password, name, phone, "", "", "staff", "active", new Timestamp(new Date()), new Timestamp(new Date()));
+                                    createUserInFirestore(user);
+                                    Toast.makeText(context, "Staff account created successfully.", Toast.LENGTH_LONG).show();
+                                    // No email verification for staff
+                                    // context.startActivity(new Intent(context, LoginActivity.class));
+                                }
+                            });
+                        }
+                    } else {
+                        Toast.makeText(context, "Registration failed: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+    }
+
     public static void loginUser(Context context, String email, String password, ProgressBar progressBar, OnCompleteListener<AuthResult> listener) {
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(context, "Email and password are required", Toast.LENGTH_SHORT).show();

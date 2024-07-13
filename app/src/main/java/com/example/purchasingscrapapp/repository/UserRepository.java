@@ -36,6 +36,21 @@ public class UserRepository {
         return resultLiveData;
     }
 
+    public LiveData<AuthResult> registerStaff(Context context, String email, String password, String name, String phone, ProgressBar progressBar) {
+        MutableLiveData<AuthResult> resultLiveData = new MutableLiveData<>();
+        FirebaseUtils.registerStaff(context, email, password, name, phone, progressBar, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    resultLiveData.setValue(task.getResult());
+                } else {
+                    resultLiveData.setValue(null);
+                }
+            }
+        });
+        return resultLiveData;
+    }
+
     public LiveData<AuthResult> loginUser(Context context, String email, String password, ProgressBar progressBar) {
         MutableLiveData<AuthResult> resultLiveData = new MutableLiveData<>();
         FirebaseUtils.loginUser(context, email, password, progressBar, new OnCompleteListener<AuthResult>() {

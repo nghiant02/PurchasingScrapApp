@@ -35,5 +35,7 @@
         <activity android:name=".activity.ManageScrapPostsActivity" />
         <activity android:name=".activity.AssignTasksActivity" />
         <activity android:name=".activity.ViewReportsActivity" />
+        <activity android:name=".activity.ManageStaffActivity" />
+        <activity android:name=".activity.CreateStaffActivity" />
     </application>
 </manifest>
