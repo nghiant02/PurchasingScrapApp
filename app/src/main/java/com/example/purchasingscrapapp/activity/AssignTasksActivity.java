@@ -12,8 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.purchasingscrapapp.R;
+import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.Task;
 import com.example.purchasingscrapapp.model.User;
+import com.example.purchasingscrapapp.viewmodel.ScrapViewModel;
 import com.example.purchasingscrapapp.viewmodel.TaskViewModel;
 import com.google.firebase.Timestamp;
 
@@ -28,7 +30,9 @@ public class AssignTasksActivity extends AppCompatActivity {
     private Button buttonAssignTask;
     private ProgressBar progressBar;
     private TaskViewModel taskViewModel;
+    private ScrapViewModel scrapViewModel;
     private List<User> staffList = new ArrayList<>();
+    private List<Scrap> scrapList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,7 @@ public class AssignTasksActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.progressBar);
 
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
 
         taskViewModel.getAllStaff().observe(this, staff -> {
             staffList = staff;
@@ -53,22 +58,34 @@ public class AssignTasksActivity extends AppCompatActivity {
             spinnerStaff.setAdapter(adapter);
         });
 
+        scrapViewModel.getScrapsByStatus("pending").observe(this, scraps -> {
+            scrapList = scraps;
+            List<String> scrapNames = new ArrayList<>();
+            for (Scrap scrap : scraps) {
+                scrapNames.add(scrap.getName());
+            }
+            ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, scrapNames);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerScrap.setAdapter(adapter);
+        });
+
         buttonAssignTask.setOnClickListener(v -> assignTask());
     }
 
     private void assignTask() {
         int selectedStaffPosition = spinnerStaff.getSelectedItemPosition();
-        if (selectedStaffPosition == -1 || staffList.isEmpty()) {
-            Toast.makeText(this, "Please select a staff member", Toast.LENGTH_SHORT).show();
+        int selectedScrapPosition = spinnerScrap.getSelectedItemPosition();
+        if (selectedStaffPosition == -1 || staffList.isEmpty() || selectedScrapPosition == -1 || scrapList.isEmpty()) {
+            Toast.makeText(this, "Please select a staff member and a scrap item", Toast.LENGTH_SHORT).show();
             return;
         }
 
         String staffId = staffList.get(selectedStaffPosition).getId();
-        String scrapId = spinnerScrap.getSelectedItem().toString();
+        String scrapId = scrapList.get(selectedScrapPosition).getId();
 
         Task task = new Task();
         task.setId(UUID.randomUUID().toString());
-        task.setUserId("LUTUZfLEHWb3xW6GUelLJnNWntE3");
+        task.setUserId(scrapList.get(selectedScrapPosition).getUserId());
         task.setAssigneeId(staffId);
         task.setScrapId(scrapId);
         task.setDescription("Collect scrap from user.");
@@ -81,6 +98,8 @@ public class AssignTasksActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
             if (success) {
                 Toast.makeText(AssignTasksActivity.this, "Task assigned successfully", Toast.LENGTH_SHORT).show();
+                scrapList.get(selectedScrapPosition).setStatus("assigned");
+                scrapViewModel.updateScrap(scrapList.get(selectedScrapPosition));
             } else {
                 Toast.makeText(AssignTasksActivity.this, "Failed to assign task", Toast.LENGTH_SHORT).show();
             }

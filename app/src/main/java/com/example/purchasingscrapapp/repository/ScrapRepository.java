@@ -40,6 +40,7 @@ public class ScrapRepository {
     public LiveData<Boolean> postScrap(Scrap scrap) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
         scrap.setCreatedAt(Timestamp.now());
+        scrap.setStatus("pending"); // Set the initial status to "pending"
         scrapsRef.document(scrap.getId()).set(scrap).addOnCompleteListener(task -> successData.setValue(task.isSuccessful()));
         return successData;
     }
@@ -79,6 +80,24 @@ public class ScrapRepository {
     public LiveData<List<Scrap>> getAllScraps() {
         MutableLiveData<List<Scrap>> scrapsData = new MutableLiveData<>();
         scrapsRef.addSnapshotListener((value, error) -> {
+            if (error != null) {
+                return;
+            }
+            List<Scrap> scraps = new ArrayList<>();
+            if (value != null) {
+                for (QueryDocumentSnapshot document : value) {
+                    Scrap scrap = convertToScrap(document);
+                    scraps.add(scrap);
+                }
+            }
+            scrapsData.setValue(scraps);
+        });
+        return scrapsData;
+    }
+
+    public LiveData<List<Scrap>> getScrapsByStatus(String status) {
+        MutableLiveData<List<Scrap>> scrapsData = new MutableLiveData<>();
+        scrapsRef.whereEqualTo("status", status).addSnapshotListener((value, error) -> {
             if (error != null) {
                 return;
             }

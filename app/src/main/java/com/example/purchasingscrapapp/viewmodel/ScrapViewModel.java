@@ -38,4 +38,8 @@ public class ScrapViewModel extends ViewModel {
     public LiveData<List<Scrap>> getAllScraps() {
         return scrapRepository.getAllScraps();
     }
+
+    public LiveData<List<Scrap>> getScrapsByStatus(String status) {
+        return scrapRepository.getScrapsByStatus(status);
+    }
 }
