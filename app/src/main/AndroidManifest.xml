@@ -37,5 +37,6 @@
         <activity android:name=".activity.ViewReportsActivity" />
         <activity android:name=".activity.ManageStaffActivity" />
         <activity android:name=".activity.CreateStaffActivity" />
+        <activity android:name=".activity.ManageTasksActivity" />
     </application>
 </manifest>

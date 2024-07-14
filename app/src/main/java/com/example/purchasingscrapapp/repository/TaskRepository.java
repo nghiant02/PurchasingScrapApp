@@ -19,21 +19,23 @@ public class TaskRepository {
     private CollectionReference tasksRef = db.collection("tasks");
     private CollectionReference usersRef = db.collection("users");
 
-    public LiveData<List<Task>> getAllTasks() {
+    public LiveData<List<Task>> getTasksByAssignee(String assigneeId) {
         MutableLiveData<List<Task>> tasksData = new MutableLiveData<>();
-        tasksRef.addSnapshotListener((value, error) -> {
-            if (error != null) {
-                return;
-            }
-            List<Task> tasks = new ArrayList<>();
-            if (value != null) {
-                for (QueryDocumentSnapshot document : value) {
-                    Task task = convertToTask(document);
-                    tasks.add(task);
-                }
-            }
-            tasksData.setValue(tasks);
-        });
+        tasksRef.whereEqualTo("assigneeId", assigneeId)
+                .whereEqualTo("status", "assigned")
+                .addSnapshotListener((value, error) -> {
+                    if (error != null) {
+                        return;
+                    }
+                    List<Task> tasks = new ArrayList<>();
+                    if (value != null) {
+                        for (QueryDocumentSnapshot document : value) {
+                            Task task = convertToTask(document);
+                            tasks.add(task);
+                        }
+                    }
+                    tasksData.setValue(tasks);
+                });
         return tasksData;
     }
 

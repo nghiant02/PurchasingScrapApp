@@ -16,8 +16,8 @@ public class TaskViewModel extends ViewModel {
         taskRepository = new TaskRepository();
     }
 
-    public LiveData<List<Task>> getAllTasks() {
-        return taskRepository.getAllTasks();
+    public LiveData<List<Task>> getTasksByAssignee(String assigneeId) {
+        return taskRepository.getTasksByAssignee(assigneeId);
     }
 
     public LiveData<Boolean> createTask(Task task) {

@@ -40,7 +40,7 @@ public class ScrapRepository {
     public LiveData<Boolean> postScrap(Scrap scrap) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
         scrap.setCreatedAt(Timestamp.now());
-        scrap.setStatus("pending"); // Set the initial status to "pending"
+        scrap.setStatus("pending");
         scrapsRef.document(scrap.getId()).set(scrap).addOnCompleteListener(task -> successData.setValue(task.isSuccessful()));
         return successData;
     }

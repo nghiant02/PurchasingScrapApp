@@ -25,11 +25,7 @@ public class StaffDashboardActivity extends AppCompatActivity {
         });
 
         findViewById(R.id.button_manage_tasks).setOnClickListener(v -> {
-            if (hasPermission(Permission.ASSIGN_TASKS)) {
-                startActivity(new Intent(StaffDashboardActivity.this, ManageTasksActivity.class));
-            } else {
-                // Show a message or handle lack of permission
-            }
+            startActivity(new Intent(StaffDashboardActivity.this, ManageTasksActivity.class));
         });
 
         findViewById(R.id.button_logout).setOnClickListener(v -> {
@@ -43,7 +39,6 @@ public class StaffDashboardActivity extends AppCompatActivity {
         if (currentUser == null) return false;
         if (currentUser.getRole().equals("admin")) return true;
 
-        // Add additional role-based logic here if needed
         return false;
     }
 }
