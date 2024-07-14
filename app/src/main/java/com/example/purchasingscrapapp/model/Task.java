@@ -4,26 +4,24 @@ import com.google.firebase.Timestamp;
 
 import java.io.Serializable;
 
-public class Order implements Serializable {
+public class Task implements Serializable {
     private String id;
-    private String buyerId;
-    private String sellerId;
+    private String userId;
+    private String assigneeId;
     private String scrapId;
-    private int quantity;
-    private double totalPrice;
+    private String description;
     private String status;
     private Timestamp createdAt;
     private Timestamp updatedAt;
 
-    public Order() {}
+    public Task() {}
 
-    public Order(String id, String buyerId, String sellerId, String scrapId, int quantity, double totalPrice, String status, Timestamp createdAt, Timestamp updatedAt) {
+    public Task(String id, String userId, String assigneeId, String scrapId, String description, String status, Timestamp createdAt, Timestamp updatedAt) {
         this.id = id;
-        this.buyerId = buyerId;
-        this.sellerId = sellerId;
+        this.userId = userId;
+        this.assigneeId = assigneeId;
         this.scrapId = scrapId;
-        this.quantity = quantity;
-        this.totalPrice = totalPrice;
+        this.description = description;
         this.status = status;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -37,20 +35,20 @@ public class Order implements Serializable {
         this.id = id;
     }
 
-    public String getBuyerId() {
-        return buyerId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setBuyerId(String buyerId) {
-        this.buyerId = buyerId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getSellerId() {
-        return sellerId;
+    public String getAssigneeId() {
+        return assigneeId;
     }
 
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public void setAssigneeId(String assigneeId) {
+        this.assigneeId = assigneeId;
     }
 
     public String getScrapId() {
@@ -61,20 +59,12 @@ public class Order implements Serializable {
         this.scrapId = scrapId;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getDescription() {
+        return description;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(double totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getStatus() {
