@@ -10,6 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ScrapRepository {
@@ -27,8 +28,7 @@ public class ScrapRepository {
             List<Scrap> scraps = new ArrayList<>();
             if (value != null) {
                 for (QueryDocumentSnapshot document : value) {
-                    Scrap scrap = document.toObject(Scrap.class);
-                    scrap.setId(document.getId());
+                    Scrap scrap = convertToScrap(document);
                     scraps.add(scrap);
                 }
             }
@@ -85,13 +85,31 @@ public class ScrapRepository {
             List<Scrap> scraps = new ArrayList<>();
             if (value != null) {
                 for (QueryDocumentSnapshot document : value) {
-                    Scrap scrap = document.toObject(Scrap.class);
-                    scrap.setId(document.getId());
+                    Scrap scrap = convertToScrap(document);
                     scraps.add(scrap);
                 }
             }
             scrapsData.setValue(scraps);
         });
         return scrapsData;
+    }
+
+    private Scrap convertToScrap(QueryDocumentSnapshot document) {
+        Scrap scrap = document.toObject(Scrap.class);
+        scrap.setId(document.getId());
+
+        if (document.get("createdAt") instanceof Long) {
+            scrap.setCreatedAt(new Timestamp(new Date((Long) document.get("createdAt"))));
+        } else {
+            scrap.setCreatedAt(document.getTimestamp("createdAt"));
+        }
+
+        if (document.get("updatedAt") instanceof Long) {
+            scrap.setUpdatedAt(new Timestamp(new Date((Long) document.get("updatedAt"))));
+        } else {
+            scrap.setUpdatedAt(document.getTimestamp("updatedAt"));
+        }
+
+        return scrap;
     }
 }

@@ -7,7 +7,7 @@
         android:id="@+id/button_view_scrap_posts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View Scrap Posts"
+        android:text="Manage Scrap Posts"
         android:layout_marginBottom="16dp" />
 
     <Button
@@ -17,4 +17,12 @@
         android:text="Manage Tasks"
         android:layout_below="@id/button_view_scrap_posts"
         android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/button_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:layout_below="@id/button_manage_tasks"
+        android:layout_marginTop="16dp" />
 </RelativeLayout>

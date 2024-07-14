@@ -7,6 +7,7 @@ import com.example.purchasingscrapapp.R;
 import com.example.purchasingscrapapp.model.User;
 import com.example.purchasingscrapapp.utils.Permission;
 import com.example.purchasingscrapapp.utils.UserUtils;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class StaffDashboardActivity extends AppCompatActivity {
 
@@ -20,7 +21,7 @@ public class StaffDashboardActivity extends AppCompatActivity {
         currentUser = UserUtils.getCurrentUser();
 
         findViewById(R.id.button_view_scrap_posts).setOnClickListener(v -> {
-            startActivity(new Intent(StaffDashboardActivity.this, ScrapListActivity.class));
+            startActivity(new Intent(StaffDashboardActivity.this, ManageScrapPostsActivity.class));
         });
 
         findViewById(R.id.button_manage_tasks).setOnClickListener(v -> {
@@ -29,6 +30,12 @@ public class StaffDashboardActivity extends AppCompatActivity {
             } else {
                 // Show a message or handle lack of permission
             }
+        });
+
+        findViewById(R.id.button_logout).setOnClickListener(v -> {
+            FirebaseAuth.getInstance().signOut();
+            startActivity(new Intent(StaffDashboardActivity.this, LoginActivity.class));
+            finish();
         });
     }
 

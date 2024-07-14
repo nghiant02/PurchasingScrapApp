@@ -1,5 +1,6 @@
 package com.example.purchasingscrapapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,13 +24,22 @@ public class ManageScrapPostsActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
 
         ScrapAdapter adapter = new ScrapAdapter(scrap -> {
-            // Handle click event
+            Intent intent = new Intent(ManageScrapPostsActivity.this, ScrapDetailActivity.class);
+            intent.putExtra("id", scrap.getId());
+            intent.putExtra("userId", scrap.getUserId());
+            intent.putExtra("categoryId", scrap.getCategoryId());
+            intent.putExtra("name", scrap.getName());
+            intent.putExtra("description", scrap.getDescription());
+            intent.putExtra("imageUrl", scrap.getImageUrl());
+            intent.putExtra("location", scrap.getLocation());
+            intent.putExtra("status", scrap.getStatus());
+            intent.putExtra("createdAt", scrap.getCreatedAt().toDate().getTime());
+            intent.putExtra("updatedAt", scrap.getUpdatedAt().toDate().getTime());
+            startActivity(intent);
         });
         recyclerView.setAdapter(adapter);
 
         scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
-        scrapViewModel.getAllScraps().observe(this, scraps -> {
-            adapter.setScraps(scraps);
-        });
+        scrapViewModel.getAllScraps().observe(this, adapter::setScraps);
     }
 }

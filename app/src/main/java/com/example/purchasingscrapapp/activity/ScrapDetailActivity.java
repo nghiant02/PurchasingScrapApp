@@ -46,7 +46,6 @@ public class ScrapDetailActivity extends AppCompatActivity {
 
         scrapViewModel = new ViewModelProvider(this).get(ScrapViewModel.class);
 
-        // Deserialize the Scrap object
         Intent intent = getIntent();
         scrap = new Scrap(
                 intent.getStringExtra("id"),
@@ -74,7 +73,6 @@ public class ScrapDetailActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerCategory.setAdapter(adapter);
 
-            // Set category spinner
             if (scrap != null) {
                 int position = adapter.getPosition(getCategoryNameById(scrap.getCategoryId()));
                 spinnerCategory.setSelection(position);
