@@ -8,14 +8,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.purchasingscrapapp.R;
-import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;

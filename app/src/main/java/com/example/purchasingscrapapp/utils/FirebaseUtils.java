@@ -75,8 +75,6 @@ public class FirebaseUtils {
                                     User user = new User(firebaseUser.getUid(), email, password, name, phone, "", "", "staff", "active", new Timestamp(new Date()), new Timestamp(new Date()));
                                     createUserInFirestore(user);
                                     Toast.makeText(context, "Staff account created successfully.", Toast.LENGTH_LONG).show();
-                                    // No email verification for staff
-                                    // context.startActivity(new Intent(context, LoginActivity.class));
                                 }
                             });
                         }
@@ -99,7 +97,7 @@ public class FirebaseUtils {
                     if (task.isSuccessful()) {
                         FirebaseUser user = mAuth.getCurrentUser();
                         if (user != null && user.isEmailVerified()) {
-                            // The role-based redirection is handled in LoginActivity
+                            updateUserStatus(user.getUid(), "active");
                         } else {
                             Toast.makeText(context, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
                             if (user != null) {
@@ -154,5 +152,17 @@ public class FirebaseUtils {
                         }
                     });
         }
+    }
+
+    private static void updateUserStatus(String userId, String newStatus) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("users").document(userId)
+                .update("status", newStatus)
+                .addOnSuccessListener(aVoid -> {
+                    // Successfully updated user status
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error
+                });
     }
 }

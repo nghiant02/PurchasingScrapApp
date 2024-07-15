@@ -6,9 +6,9 @@ import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.DocumentSnapshot;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -125,37 +125,20 @@ public class ScrapRepository {
         return scrapData;
     }
 
-    private Scrap convertToScrap(QueryDocumentSnapshot document) {
-        Scrap scrap = document.toObject(Scrap.class);
-        scrap.setId(document.getId());
-
-        if (document.get("createdAt") instanceof Long) {
-            scrap.setCreatedAt(new Timestamp(new Date((Long) document.get("createdAt"))));
-        } else {
-            scrap.setCreatedAt(document.getTimestamp("createdAt"));
-        }
-
-        if (document.get("updatedAt") instanceof Long) {
-            scrap.setUpdatedAt(new Timestamp(new Date((Long) document.get("updatedAt"))));
-        } else {
-            scrap.setUpdatedAt(document.getTimestamp("updatedAt"));
-        }
-
-        return scrap;
-    }
-
     private Scrap convertToScrap(DocumentSnapshot document) {
         Scrap scrap = document.toObject(Scrap.class);
         scrap.setId(document.getId());
 
-        if (document.get("createdAt") instanceof Long) {
-            scrap.setCreatedAt(new Timestamp(new Date((Long) document.get("createdAt"))));
+        Object createdAt = document.get("createdAt");
+        if (createdAt instanceof Long) {
+            scrap.setCreatedAt(new Timestamp(new Date((Long) createdAt)));
         } else {
             scrap.setCreatedAt(document.getTimestamp("createdAt"));
         }
 
-        if (document.get("updatedAt") instanceof Long) {
-            scrap.setUpdatedAt(new Timestamp(new Date((Long) document.get("updatedAt"))));
+        Object updatedAt = document.get("updatedAt");
+        if (updatedAt instanceof Long) {
+            scrap.setUpdatedAt(new Timestamp(new Date((Long) updatedAt)));
         } else {
             scrap.setUpdatedAt(document.getTimestamp("updatedAt"));
         }
