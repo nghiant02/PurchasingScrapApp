@@ -2,6 +2,7 @@ package com.example.purchasingscrapapp.repository;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
 import com.example.purchasingscrapapp.model.Task;
 import com.example.purchasingscrapapp.model.User;
 import com.google.firebase.Timestamp;
@@ -22,7 +23,6 @@ public class TaskRepository {
     public LiveData<List<Task>> getTasksByAssignee(String assigneeId) {
         MutableLiveData<List<Task>> tasksData = new MutableLiveData<>();
         tasksRef.whereEqualTo("assigneeId", assigneeId)
-                .whereEqualTo("status", "assigned")
                 .addSnapshotListener((value, error) -> {
                     if (error != null) {
                         return;
@@ -42,14 +42,20 @@ public class TaskRepository {
     public LiveData<Boolean> createTask(Task task) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
         task.setCreatedAt(Timestamp.now());
-        tasksRef.document(task.getId()).set(task).addOnCompleteListener(taskResult -> successData.setValue(taskResult.isSuccessful()));
+        tasksRef.document(task.getId()).set(task).addOnCompleteListener(taskResult -> {
+            boolean success = taskResult.isSuccessful();
+            successData.setValue(success);
+        });
         return successData;
     }
 
     public LiveData<Boolean> updateTask(Task task) {
         MutableLiveData<Boolean> successData = new MutableLiveData<>();
         task.setUpdatedAt(Timestamp.now());
-        tasksRef.document(task.getId()).set(task).addOnCompleteListener(taskResult -> successData.setValue(taskResult.isSuccessful()));
+        tasksRef.document(task.getId()).set(task).addOnCompleteListener(taskResult -> {
+            boolean success = taskResult.isSuccessful();
+            successData.setValue(success);
+        });
         return successData;
     }
 

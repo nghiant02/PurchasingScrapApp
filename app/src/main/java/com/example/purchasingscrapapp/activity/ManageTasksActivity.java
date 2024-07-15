@@ -50,10 +50,8 @@ public class ManageTasksActivity extends AppCompatActivity {
                             scrap.setStatus(newStatus);
                             scrapViewModel.updateScrap(scrap).observe(this, scrapUpdateSuccess -> {
                                 if (scrapUpdateSuccess) {
-                                    if ("completed".equals(newStatus)) {
-                                        taskAdapter.notifyDataSetChanged();
-                                    }
                                     Toast.makeText(ManageTasksActivity.this, "Task and Scrap updated successfully", Toast.LENGTH_SHORT).show();
+                                    loadTasks();
                                 } else {
                                     Toast.makeText(ManageTasksActivity.this, "Failed to update Scrap status", Toast.LENGTH_SHORT).show();
                                 }

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -60,35 +59,37 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         holder.textViewTaskDescription.setText(currentTask.getDescription());
         holder.textViewTaskStatus.setText(currentTask.getStatus());
 
-        if ("completed".equals(currentTask.getStatus())) {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.txt_hint));
-            holder.layoutButtons.setVisibility(View.GONE);
-        } else {
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
-            holder.layoutButtons.setVisibility(View.VISIBLE);
-        }
+        holder.itemView.setBackgroundColor(ContextCompat.getColor(context, R.color.white));
+        holder.layoutButtons.setVisibility(View.VISIBLE);
 
-        holder.buttonUpdateStatus.setText("in_progress".equals(currentTask.getStatus()) ? "Complete" : "In Progress");
-
-        holder.buttonUpdateStatus.setOnClickListener(v -> {
-            String newStatus = "in_progress".equals(currentTask.getStatus()) ? "completed" : "in_progress";
+        holder.textInProgress.setOnClickListener(v -> {
             if (statusChangeListener != null) {
-                statusChangeListener.onStatusChange(currentTask, newStatus);
+                statusChangeListener.onStatusChange(currentTask, "in_progress");
+            }
+        });
+
+        holder.textComplete.setOnClickListener(v -> {
+            if (statusChangeListener != null) {
+                statusChangeListener.onStatusChange(currentTask, "completed");
+            }
+        });
+
+        holder.textCancel.setOnClickListener(v -> {
+            if (statusChangeListener != null) {
+                statusChangeListener.onStatusChange(currentTask, "cancelled");
             }
         });
 
         holder.itemView.setOnLongClickListener(v -> {
-            if ("completed".equals(currentTask.getStatus())) {
-                new AlertDialog.Builder(context)
-                        .setTitle("Delete Task")
-                        .setMessage("Are you sure you want to delete this task?")
-                        .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                            tasks.remove(currentTask);
-                            notifyDataSetChanged();
-                        })
-                        .setNegativeButton(android.R.string.no, null)
-                        .show();
-            }
+            new AlertDialog.Builder(context)
+                    .setTitle("Delete Task")
+                    .setMessage("Are you sure you want to delete this task?")
+                    .setPositiveButton(android.R.string.yes, (dialog, which) -> {
+                        tasks.remove(currentTask);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton(android.R.string.no, null)
+                    .show();
             return true;
         });
     }
@@ -109,7 +110,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
         private TextView textViewTaskStatus;
         private TextView textViewLocation;
         private ImageView imageViewScrap;
-        private Button buttonUpdateStatus;
+        private TextView textInProgress;
+        private TextView textComplete;
+        private TextView textCancel;
         private LinearLayout layoutButtons;
 
         public TaskHolder(@NonNull View itemView) {
@@ -119,7 +122,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskHolder> {
             textViewTaskStatus = itemView.findViewById(R.id.text_view_task_status);
             textViewLocation = itemView.findViewById(R.id.text_view_location);
             imageViewScrap = itemView.findViewById(R.id.image_view_scrap);
-            buttonUpdateStatus = itemView.findViewById(R.id.button_update_status);
+            textInProgress = itemView.findViewById(R.id.text_in_progress);
+            textComplete = itemView.findViewById(R.id.text_complete);
+            textCancel = itemView.findViewById(R.id.text_cancel);
             layoutButtons = itemView.findViewById(R.id.layout_buttons);
 
             itemView.setOnClickListener(v -> {
