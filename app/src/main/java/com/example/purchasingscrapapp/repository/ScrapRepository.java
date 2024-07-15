@@ -6,6 +6,7 @@ import com.example.purchasingscrapapp.model.Scrap;
 import com.example.purchasingscrapapp.model.ScrapCategory;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -113,7 +114,37 @@ public class ScrapRepository {
         return scrapsData;
     }
 
+    public LiveData<Scrap> getScrapById(String scrapId) {
+        MutableLiveData<Scrap> scrapData = new MutableLiveData<>();
+        scrapsRef.document(scrapId).get().addOnSuccessListener(documentSnapshot -> {
+            if (documentSnapshot.exists()) {
+                Scrap scrap = convertToScrap(documentSnapshot);
+                scrapData.setValue(scrap);
+            }
+        });
+        return scrapData;
+    }
+
     private Scrap convertToScrap(QueryDocumentSnapshot document) {
+        Scrap scrap = document.toObject(Scrap.class);
+        scrap.setId(document.getId());
+
+        if (document.get("createdAt") instanceof Long) {
+            scrap.setCreatedAt(new Timestamp(new Date((Long) document.get("createdAt"))));
+        } else {
+            scrap.setCreatedAt(document.getTimestamp("createdAt"));
+        }
+
+        if (document.get("updatedAt") instanceof Long) {
+            scrap.setUpdatedAt(new Timestamp(new Date((Long) document.get("updatedAt"))));
+        } else {
+            scrap.setUpdatedAt(document.getTimestamp("updatedAt"));
+        }
+
+        return scrap;
+    }
+
+    private Scrap convertToScrap(DocumentSnapshot document) {
         Scrap scrap = document.toObject(Scrap.class);
         scrap.setId(document.getId());
 
