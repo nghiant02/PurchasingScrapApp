@@ -8,9 +8,12 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
+
 import com.example.purchasingscrapapp.R;
+import com.example.purchasingscrapapp.utils.FirebaseUtils;
 import com.example.purchasingscrapapp.utils.ValidationUtils;
 import com.example.purchasingscrapapp.viewmodel.UserViewModel;
 import com.google.firebase.auth.FirebaseUser;
@@ -51,55 +54,59 @@ public class LoginActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     if (authResult != null) {
                         FirebaseUser user = authResult.getUser();
-                        db.collection("users").document(user.getUid()).get().addOnCompleteListener(task -> {
-                            if (task.isSuccessful()) {
-                                DocumentSnapshot document = task.getResult();
-                                if (document.exists()) {
-                                    String status = document.getString("status");
-                                    String role = document.getString("role");
-                                    if ("active".equals(status)) {
-                                        if ("admin".equals(role) || "staff".equals(role)) {
-                                            Intent intent = getIntentForRole(role);
-                                            startActivity(intent);
-                                            finish();
-                                        } else if (user.isEmailVerified()) {
-                                            Intent intent = getIntentForRole(role);
-                                            startActivity(intent);
-                                            finish();
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Please verify your email before logging in.", Toast.LENGTH_LONG).show();
-                                        }
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Your account is not active.", Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "User data not found.", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                        if (user != null) {
+                            FirebaseUtils.updateUserStatus(user.getUid(), "active");
+                            handleUserLogin(user);
+                        } else {
+                            Toast.makeText(this, "Login failed.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(LoginActivity.this, "Login failed.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Login failed.", Toast.LENGTH_SHORT).show();
                     }
                 });
             } else {
-                Toast.makeText(LoginActivity.this, "Please enter valid email and password.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Please enter valid email and password.", Toast.LENGTH_SHORT).show();
             }
         });
 
-        registerButton.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
-        forgotPasswordButton.setOnClickListener(v -> startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class)));
+        registerButton.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
+        forgotPasswordButton.setOnClickListener(v -> startActivity(new Intent(this, ForgotPasswordActivity.class)));
     }
 
-    private Intent getIntentForRole(String role) {
-        switch (role) {
-            case "admin":
-                return new Intent(LoginActivity.this, AdminDashboardActivity.class);
-            case "staff":
-                return new Intent(LoginActivity.this, StaffDashboardActivity.class);
-            default:
-                return new Intent(LoginActivity.this, MainActivity.class);
-        }
+    private void handleUserLogin(FirebaseUser user) {
+        db.collection("users").document(user.getUid()).get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DocumentSnapshot document = task.getResult();
+                if (document.exists()) {
+                    String status = document.getString("status");
+                    String role = document.getString("role");
+                    if ("active".equals(status)) {
+                        Intent intent;
+                        switch (role) {
+                            case "admin":
+                                intent = new Intent(this, AdminDashboardActivity.class);
+                                Toast.makeText(this, "Welcome Admin!", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "staff":
+                                intent = new Intent(this, StaffDashboardActivity.class);
+                                Toast.makeText(this, "Welcome Staff!", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                intent = new Intent(this, MainActivity.class);
+                                Toast.makeText(this, "Welcome User!", Toast.LENGTH_SHORT).show();
+                                break;
+                        }
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(this, "Your account is not active.", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(this, "User data not found.", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Toast.makeText(this, "Failed to retrieve user data.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
